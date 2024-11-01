@@ -5,6 +5,11 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
+
+module.exports = {
+  reactStrictMode: true,
+  // Any other Next.js configuration options
+};
 const config = {
   images: {
     remotePatterns: [
