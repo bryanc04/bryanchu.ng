@@ -75,7 +75,7 @@ function Card({ heading, logo, subheading, bulletedList, color }: Props) {
         <div>
           <ul>
             {bulletedList.map((item, index) => (
-              <li>
+              <li key={index}>
                 <div
                   key={index}
                   style={{ fontSize: "10px", listStyleType: "circle" }}

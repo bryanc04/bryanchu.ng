@@ -30,12 +30,13 @@ export default function Awards() {
           marginRight: "auto",
         }}
       >
-        {data.map((data: any) => (
+        {data.map((d: any) => (
           <div
+            key={d}
             style={{ marginTop: "20px" }}
             className="rounded-md border border-white bg-black px-4 py-3 font-mono text-sm text-white"
           >
-            {data}
+            {d}
           </div>
         ))}
       </div>
