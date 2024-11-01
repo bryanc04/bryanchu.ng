@@ -169,11 +169,15 @@ export default function Research() {
           paddingTop: "100px",
         }}
       >
-        <div className="container" style={{}}>
-          <SectionHeading title="Research" />
+        <div
+          className="container"
+          style={{ marginTop: "100px", height: "200px" }}
+        >
+          <SectionHeading title="Resefarch" />
+          asfadsfsda
         </div>
 
-        <div style={{ marginTop: "-150px" }}>
+        <div style={{ marginTop: "-160px" }}>
           {data.map((image, index) => (
             <Image data={image} key={image.name} />
           ))}

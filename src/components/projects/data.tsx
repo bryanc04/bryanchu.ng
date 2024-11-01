@@ -16,7 +16,7 @@ export const timelineData: TimelineEntry[] = [
         showStarCount: false,
       },
       site: {
-        url: "pokemon-bryanc004.web.app",
+        url: "https://pokemon-bryanc004.web.app",
         icon: <RiExternalLinkLine size={20} />,
       },
     },
@@ -81,7 +81,7 @@ export const timelineData: TimelineEntry[] = [
       },
     },
     imageUrl: "/images/chemistry.png",
-    description: `A software for the Deans' Office at the Loomis Chaffee School that automates their process of assigning students to dorms based on student survey.`,
+    description: `A software for the Loomis Chaffee School's Chemistry Department that provides interactive figures of molecules.`,
     tech: [
       "Python",
       "Linear Algebra",
@@ -95,11 +95,11 @@ export const timelineData: TimelineEntry[] = [
     cards: {
       a: {
         title: "Client Request",
-        text: `Prior to the completion of this project, Mr. Osei used physical objects to manually build each molecule for class. An interactive website for Mr. Osei and his students would eliminate the need and allwo for a more effective learning.`,
+        text: `Prior to the completion of this project, Mr. Osei used physical objects to manually build each molecule for class. An interactive website for Mr. Osei and his students would eliminate the need and allow for more effective learning.`,
       },
       b: {
         title: "My Work",
-        text: `Developed a web-app that allows students and teachers to interact with various molecules in 2D/3D. Used Linear Algebra to calculate element positions, and used the PubChem API to obtain information. Now Integrated into the chemistry curriculum.`,
+        text: `Developed a web-app that allows students and teachers to interact with various molecules in 2D/3D. Used Linear Algebra to calculate element positions, and used the PubChem API to obtain information. Now integrated into the chemistry curriculum.`,
       },
     },
   },
@@ -123,7 +123,7 @@ export const timelineData: TimelineEntry[] = [
     cards: {
       a: {
         title: "Client Request",
-        text: `Prior to the completion of this project, Dr. Fisher individually managed every student's currency (Pelicoin) balance, manually adjusting tax rates, interest rates, stock returns, bond returns, etc for everyone. Besdies, students had to individually ask if they wanted to internally transfer their balances, which was a very tedious process.`,
+        text: `Prior to the completion of this project, Dr. Fisher individually managed every student's currency (Pelicoin) balance, manually adjusting tax rates, interest rates, stock returns, bond returns, etc for everyone. Besides, students had to individually ask if they wanted to internally transfer their balances, which was a very tedious process.`,
       },
       b: {
         title: "My Work",
