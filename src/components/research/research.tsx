@@ -173,8 +173,7 @@ export default function Research() {
           className="container"
           style={{ marginTop: "100px", height: "200px" }}
         >
-          <SectionHeading title="Resefarch" />
-          asfadsfsda
+          <SectionHeading title="Research" />
         </div>
 
         <div style={{ marginTop: "-160px" }}>
