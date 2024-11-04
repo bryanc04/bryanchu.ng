@@ -15,7 +15,7 @@ import AnimatedCursor from "react-animated-cursor";
 export default function HomePage() {
   const PreloadSite = (url: any) => {
     useEffect(() => {
-      // Create an invisible iframe to load the site in the background
+      console.log("fda");
       const iframe = document.createElement("iframe");
       iframe.style.display = "none";
       iframe.src = url;
@@ -28,9 +28,35 @@ export default function HomePage() {
 
     return null;
   };
+
+  const PrefetchWebsite = (url: any) => {
+    useEffect(() => {
+      console.log("fdsa");
+      const link = document.createElement("link");
+      link.rel = "prefetch";
+      link.href = url;
+      link.as = "document"; // Specifies that the resource is a document
+      document.head.appendChild(link);
+
+      return () => {
+        document.head.removeChild(link);
+      };
+    }, [url]);
+
+    return null;
+  };
   return (
     <main className="relative">
+      <PrefetchWebsite url="https://pokemon-bryanc004.web.app" />
+
       <PreloadSite url="https://pokemon-bryanc004.web.app" />
+      <a
+        href="https://pokemon-bryanc004.web.app"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Visit Example Site
+      </a>
 
       <AnimatedCursor
         innerSize={8}
