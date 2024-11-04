@@ -11,6 +11,7 @@ import Education from "~/components/education/education";
 import Research from "~/components/research/research";
 import Awards from "~/components/awards/awards";
 import AnimatedCursor from "react-animated-cursor";
+import Iframe from "react-iframe";
 
 export default function HomePage() {
   const PreloadSite = (url: any) => {
@@ -48,15 +49,22 @@ export default function HomePage() {
   return (
     <main className="relative">
       <PrefetchWebsite url="https://pokemon-bryanc004.web.app" />
+      <Iframe
+        url="https://pokemon-bryanc004.web.app"
+        width="0"
+        height="0"
+        id=""
+        className=""
+        display="block"
+        position="relative"
+      />
 
       <PreloadSite url="https://pokemon-bryanc004.web.app" />
       <a
         href="https://pokemon-bryanc004.web.app"
         target="_blank"
         rel="noopener noreferrer"
-      >
-        Visit Example Site
-      </a>
+      ></a>
 
       <AnimatedCursor
         innerSize={8}

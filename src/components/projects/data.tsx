@@ -21,7 +21,7 @@ export const timelineData: TimelineEntry[] = [
       },
     },
     imageUrl: "/images/pokemon.png",
-    description: `An online game where users can control my Dog (Pommy) in a pokemon world. By following the instructions, the user can access the basics of my portfolio within the game.`,
+    description: `An online game where users can control my Dog (Pommy) in a pokemon world. By following the instructions, the user can access the basics of my portfolio within the game. Please check this out (though it takes some time to load on some devices)!`,
     tech: [
       "React",
       "TypeScript",
