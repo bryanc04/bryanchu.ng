@@ -2,6 +2,7 @@
 
 import { About } from "~/components/about";
 import { Contact } from "~/components/contact";
+import Link from "next/link";
 import { Footer } from "~/components/footer";
 import React, { useEffect } from "react";
 import { Hero } from "~/components/hero";
@@ -12,6 +13,29 @@ import Research from "~/components/research/research";
 import Awards from "~/components/awards/awards";
 import AnimatedCursor from "react-animated-cursor";
 import Iframe from "react-iframe";
+
+interface PrerenderWebsiteProps {
+  url: string;
+}
+
+const PrerenderWebsite: React.FC<PrerenderWebsiteProps> = ({ url }) => {
+  useEffect(() => {
+    if (typeof url === "string") {
+      const link = document.createElement("link");
+      link.rel = "prerender";
+      link.href = url;
+      document.head.appendChild(link);
+
+      return () => {
+        document.head.removeChild(link);
+      };
+    } else {
+      console.error("URL must be a string:", url);
+    }
+  }, [url]);
+
+  return null;
+};
 
 export default function HomePage() {
   const PreloadSite = (url: any) => {
@@ -36,7 +60,7 @@ export default function HomePage() {
       const link = document.createElement("link");
       link.rel = "prefetch";
       link.href = url;
-      link.as = "document"; // Specifies that the resource is a document
+      link.as = "document";
       document.head.appendChild(link);
 
       return () => {
@@ -58,13 +82,15 @@ export default function HomePage() {
         display="block"
         position="relative"
       />
+      <Link href="https://pokemon-bryanc004.web.app" prefetch={true}></Link>
+      <PrerenderWebsite url={"https://pokemon-bryanc004.web.app"} />
 
-      <PreloadSite url="https://pokemon-bryanc004.web.app" />
+      {/* <PreloadSite url="https://pokemon-bryanc004.web.app" />
       <a
         href="https://pokemon-bryanc004.web.app"
         target="_blank"
         rel="noopener noreferrer"
-      ></a>
+      ></a> */}
 
       <AnimatedCursor
         innerSize={8}
