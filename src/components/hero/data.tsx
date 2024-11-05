@@ -44,7 +44,7 @@ export const profileCard = {
     },
   ],
   tooltip: {
-    imagePath: "https://i.ibb.co/h9RP7WJ/IMG-9947.jpg",
+    imagePath: "https://i.postimg.cc/Z5Cxqh1s/IMG-1626-7.jpg",
     title: "Hey,",
     subTitle: "That's me!",
   },
