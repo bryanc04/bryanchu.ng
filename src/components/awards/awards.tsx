@@ -14,7 +14,7 @@ export default function Awards() {
     "2nd Place in CT/Nationals Qualifier | TEAMS Engineering Competition",
     "USACO Platnium Division | USA Computing Olympiad",
     "$1000 + $500 (3rd Place) Award | The Non-Trivial Fellowship",
-    "Junior Math Deparmental Award | Loomis Chaffee School",
+    "Junior Math Departmental Award | Loomis Chaffee School",
     "Junior Science Departmental Award | Loomis Chaffee School",
   ];
   return (

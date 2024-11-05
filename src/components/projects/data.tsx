@@ -1,5 +1,6 @@
 import { RiExternalLinkLine } from "react-icons/ri";
 import type { TimelineEntry } from "../ui/timeline";
+import { FaLink } from "react-icons/fa";
 
 export const sectionHeading = {
   title: "What I've worked on",
@@ -8,7 +9,7 @@ export const sectionHeading = {
 
 export const timelineData: TimelineEntry[] = [
   {
-    title: "Poke-dog Game Portfolio (beta)",
+    title: "Poke-dog Game Portfolio",
     projectUrls: {
       repo: {
         owner: "bryanc04",
@@ -17,11 +18,11 @@ export const timelineData: TimelineEntry[] = [
       },
       site: {
         url: "https://pokemon-bryanc004.web.app",
-        icon: <RiExternalLinkLine size={20} />,
+        icon: <FaLink color="red" size={20} />,
       },
     },
     imageUrl: "/images/pokemon.png",
-    description: `An online game where users can control my Dog (Pommy) in a pokemon world. By following the instructions, the user can access the basics of my portfolio within the game. Please check this out (though it takes some time to load on some devices)!`,
+    description: `Please check this out! It's an online game where users can control my Dog (Pommy) in a pokemon world. By following the instructions, the user can access the basics of my portfolio within the game. (Currently, it takes some time to load on certain devices).`,
     tech: [
       "React",
       "TypeScript",

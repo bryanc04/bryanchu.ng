@@ -13,6 +13,7 @@ import Research from "~/components/research/research";
 import Awards from "~/components/awards/awards";
 import AnimatedCursor from "react-animated-cursor";
 import Iframe from "react-iframe";
+import { preloadPokemonSite } from "./modelPreloader";
 
 interface PrerenderWebsiteProps {
   url: string;
@@ -70,13 +71,20 @@ export default function HomePage() {
 
     return null;
   };
+  useEffect(() => {
+    // Preload as soon as the app mounts
+    if (typeof window !== "undefined") {
+      // Small delay to not compete with initial page load
+      setTimeout(preloadPokemonSite, 1000);
+    }
+  }, []);
   return (
     <main className="relative">
       <PrefetchWebsite url="https://pokemon-bryanc004.web.app" />
       <Iframe
         url="https://pokemon-bryanc004.web.app"
-        width="0"
-        height="0"
+        width="1px"
+        height="1px"
         id=""
         className=""
         display="block"

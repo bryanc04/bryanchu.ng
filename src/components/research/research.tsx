@@ -1,187 +1,167 @@
-"use client";
-
-import { useRef } from "react";
+import React, { useState } from "react";
+import { useSprings, animated, to as interpolate } from "@react-spring/web";
+import { useDrag } from "react-use-gesture";
 import { SectionHeading } from "~/components/ui/section-heading";
-import {
-  motion,
-  useScroll,
-  useSpring,
-  useTransform,
-  MotionValue,
-} from "framer-motion";
 import ieee from "public/images/ieee.png";
 
-// CSS variables
-const globalStyles = {
-  "--black": "#000000",
-  "--ash-black": "#222",
-  "--white": "#fafafa",
-  "--sky": "#00ccff",
-  "--green": "#22dddd",
-  "--blue": "#1300ff",
-  "--dusk": "#6600ff",
-  "--purple": "#9900ff",
-  "--pink": "#ff0066",
-  "--red": "#fe0222",
-  "--orange": "#fd7702",
-  "--yellow": "#ffbb00",
-  "--background": "var(--red)",
-  "--accent": "var(--white)",
-};
-
-function useParallax(value: MotionValue<number>, distance: number) {
-  return useTransform(value, [0, 1], [-distance, distance]);
+interface ResearchPaper {
+  name: string;
+  hashtags: string[];
+  abstract: string;
+  url: string;
 }
 
-function Image({ data }: { data: any }) {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref });
-  const y = useParallax(scrollYProgress, 300);
+const data: ResearchPaper[] = [
+  {
+    name: "Addressing Data Imbalance in Plant Disease Recognition through Contrastive Learning",
+    hashtags: ["AI", " CNNs"],
+    abstract:
+      "The following study introduces a novel framework for recognizing plant diseases, tackling the issue of imbalanced datasets, which is prevalent in agriculture, a key sector for many economies. Plant diseases can significantly affect crop quality and yield, making early and accurate detection vital for effective disease management. Traditional Convolutional Neural Networks (CNNs) have shown promise in plant disease recognition but often fall short with non-tomato crops due to class imbalance in datasets. The proposed approach utilizes contrastive learning to train a model on the PlantDoc dataset in a self-supervised manner, allowing it to learn meaningful representations from unlabeled data by maximizing the similarity between images based on disease state rather than species. This method shows a marked improvement in accuracy, achieving 87.42% on the PlantDoc dataset and demonstrating its superiority over existing supervised learning methods. The agnostic nature of the model towards plant species allows for universal application in agriculture, offering a significant tool for disease management and enhancing productivity in both existing farms and future smart farming environments.",
+    url: "https://ieeexplore.ieee.org/document/10433841",
+  },
+  {
+    name: "DataAgent: Evaluating Large Language Models' Ability to Answer Zero-Shot, Natural Language Queries",
+    hashtags: ["AI", " LLMs"],
+    url: "https://ieeexplore.ieee.org/document/10433803",
+    abstract: `Conventional processes for analyzing datasets and extracting meaningful information are often time-consuming and laborious. Previous work has identified manual, repetitive coding and data collection as major obstacles that hinder data scientists from undertaking more nuanced labor and high-level projects. To combat this, we evaluated OpenAI's GPT-3.5 as a "Language Data Scientist" (LDS) that can extrapolate key findings, including correlations and basic information, from a given dataset. The model was tested on a diverse set of benchmark datasets to evaluate its performance across multiple standards, including data science code-generation based tasks involving libraries such as NumPy, Pandas, Scikit-Learn, and TensorFlow, and was broadly successful in correctly answering a given data science query related to the benchmark dataset. The LDS used various novel prompt engineering techniques to effectively answer a given question, including Chain-of-Thought reinforcement and SayCan prompt engineering. Our findings demonstrate great potential for leveraging Large Language Models for low-level, zero-shot data analysis.`,
+  },
+];
+
+// Modified initial position function
+const to = (i: number) => ({
+  x: 0,
+  y: i * 4, // Reduced spacing between cards
+  scale: 1,
+  rot: -2 + Math.random() * 4, // Reduced rotation range for more stable appearance
+  delay: i * 50, // Reduced delay for quicker initial animation
+});
+
+// Modified starting position
+const from = (i: number) => ({
+  x: 0,
+  y: 0, // Start from center instead of off-screen
+  scale: 1,
+  rot: 0,
+});
+
+const trans = (r: number, s: number) =>
+  `perspective(1500px) rotateX(10deg) rotateY(${r / 10}deg) rotateZ(${r}deg) scale(${s})`;
+
+function Deck() {
+  const [gone] = useState(() => new Set());
+  const [props, api] = useSprings(data.length, (i) => ({
+    ...to(i),
+    from: from(i),
+  }));
+
+  const bind = useDrag(
+    ({ args: [index], down, movement: [mx], direction: [xDir], velocity }) => {
+      const trigger = velocity > 0.2;
+      const dir = xDir < 0 ? -1 : 1;
+      if (!down && trigger) gone.add(index);
+      api.start((i) => {
+        if (index !== i) return;
+        const isGone = gone.has(index);
+        const x = isGone ? (200 + window.innerWidth) * dir : down ? mx : 0;
+        const rot = mx / 100 + (isGone ? dir * 10 * velocity : 0);
+        const scale = down ? 1.1 : 1;
+        return {
+          x,
+          rot,
+          scale,
+          delay: undefined,
+          config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 },
+        };
+      });
+      if (!down && gone.size === data.length)
+        setTimeout(() => {
+          gone.clear();
+          api.start((i) => to(i));
+        }, 600);
+    },
+  );
 
   return (
-    <section
-      className="relative flex h-screen items-center justify-center"
-      style={{ scrollSnapAlign: "center", perspective: "500px" }}
-    >
-      <div
-        ref={ref}
-        className="relative mx-5 h-[600px] max-h-[90vh] w-[500px] overflow-hidden"
-        style={{ background: "var(--white)", color: "black", padding: "20px" }}
-      >
-        <div style={{ display: "grid", gridTemplateColumns: "auto auto" }}>
-          <div className="font-bold">{data.name}</div>
-          <img src={ieee.src} style={{ height: "80px" }} />
-        </div>
-        <div
-          style={{
-            padding: "20px",
-            height: "80%",
-            overflow: "hidden",
-          }}
-        >
-          {data.abstract}
-        </div>
-        <div
-          className="italic"
-          style={{
-            marginLeft: "auto",
-            marginRight: "auto",
-            alignItems: "center",
-            width: "fit-content",
-            fontSize: "13px",
-            marginTop: "10px",
-          }}
-        >
-          Continue reading at:{" "}
-          <a
-            href={data.url}
-            style={{ color: "blue", textDecoration: "underline" }}
+    <div className="flex h-screen items-center justify-center">
+      {props.map(({ x, y, rot, scale }, i) => {
+        const paper = data[i];
+        if (!paper) return null;
+
+        return (
+          <animated.div
+            key={i}
+            style={{
+              x,
+              y,
+              position: "absolute",
+              width: "500px",
+              height: "600px",
+              willChange: "transform",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
-            IEEE
-          </a>
-        </div>
-      </div>
-      <motion.h2
-        className="absolute m-0 text-[56px] font-bold leading-[1.2] tracking-[-3px] text-[var(--accent)]"
-        style={{
-          y,
-          left: "calc(50% + 230px)",
-          color: "var(--accent)",
-        }}
-      >
-        #{data.hashtags.toString(" ")}
-      </motion.h2>
-    </section>
+            <animated.div
+              {...bind(i)}
+              style={{
+                transform: interpolate([rot, scale], trans),
+                width: "100%",
+                height: "100%",
+                backgroundColor: "white",
+                borderRadius: "10px",
+                padding: "20px",
+                overflow: "hidden",
+                touchAction: "none",
+                cursor: "grab",
+                willChange: "transform",
+                boxShadow: "0 12px 24px rgba(0, 0, 0, 0.2)",
+              }}
+            >
+              <div
+                className="grid grid-cols-2"
+                style={{ gridTemplateColumns: "70% 30%" }}
+              >
+                <div className="font-bold">{paper.name}</div>
+                <img src={ieee.src} className="h-20" alt="IEEE logo" />
+              </div>
+              <div className="h-4/5 overflow-hidden p-5">{paper.abstract}</div>
+              <div className="mx-auto mt-2 text-center text-sm italic">
+                Continue reading at:{" "}
+                <a href={paper.url} className="text-blue-600 underline">
+                  IEEE
+                </a>
+              </div>
+            </animated.div>
+          </animated.div>
+        );
+      })}
+    </div>
   );
 }
 
 export default function Research() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
-  const data = [
-    {
-      name: "Addressing Data Imbalance in Plant Disease Recognition through Contrastive Learning",
-      hashtags: ["AI", " CNNs"],
-      abstract:
-        "The following study introduces a novel framework for recognizing plant diseases, tackling the issue of imbalanced datasets, which is prevalent in agriculture, a key sector for many economies. Plant diseases can significantly affect crop quality and yield, making early and accurate detection vital for effective disease management. Traditional Convolutional Neural Networks (CNNs) have shown promise in plant disease recognition but often fall short with non-tomato crops due to class imbalance in datasets. The proposed approach utilizes contrastive learning to train a model on the PlantDoc dataset in a self-supervised manner, allowing it to learn meaningful representations from unlabeled data by maximizing the similarity between images based on disease state rather than species. This method shows a marked improvement in accuracy, achieving 87.42% on the PlantDoc dataset and demonstrating its superiority over existing supervised learning methods. The agnostic nature of the model towards plant species allows for universal application in agriculture, offering a significant tool for disease management and enhancing productivity in both existing farms and future smart farming environments.",
-      url: "https://ieeexplore.ieee.org/document/10433841",
-    },
-    {
-      name: "DataAgent: Evaluating Large Language Models’ Ability to Answer Zero-Shot, Natural Language Queries",
-      hashtags: ["AI", " LLMs"],
-      url: "https://ieeexplore.ieee.org/document/10433803",
-      abstract: `Conventional processes for analyzing datasets and extracting meaningful information are often time-consuming and laborious. Previous work has identified manual, repetitive coding and data collection as major obstacles that hinder data scientists from undertaking more nuanced labor and high-level projects. To combat this, we evaluated OpenAI’s GPT-3.5 as a "Language Data Scientist" (LDS) that can extrapolate key findings, including correlations and basic information, from a given dataset. The model was tested on a diverse set of benchmark datasets to evaluate its performance across multiple standards, including data science code-generation based tasks involving libraries such as NumPy, Pandas, Scikit-Learn, and TensorFlow, and was broadly successful in correctly answering a given data science query related to the benchmark dataset. The LDS used various novel prompt engineering techniques to effectively answer a given question, including Chain-of-Thought reinforcement and SayCan prompt engineering. Our findings demonstrate great potential for leveraging Large Language Models for low-level, zero-shot data analysis.`,
-    },
-  ];
-
   return (
-    <>
-      <style>
-        {`
-          * {
-            font-family: sofia-pro, sans-serif;
-            font-weight: 400;
-            font-style: normal;
-            -webkit-font-smoothing: antialiased;
-          }
-
-          html {
-            scroll-snap-type: y proximity;
-          }
-
-          ::-webkit-scrollbar {
-            height: 5px;
-            width: 5px;
-            background: var(--background);
-          }
-
-          ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            -webkit-border-radius: 1ex;
-          }
-
-          ::-webkit-scrollbar-corner {
-            background: var(--background);
-          }
-
-          .progress {
-            position: fixed;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--accent);
-            bottom: 100px;
-          }
-        `}
-      </style>
-
-      {/* Parallax section */}
-      <section
-        className="relative w-full bg-[#141414]"
+    <section
+      className="relative min-h-screen w-full bg-[#141414]"
+      style={{ color: "black" }}
+    >
+      <div className="container h-48 pt-40">
+        <SectionHeading title="Research" />
+      </div>
+      <Deck />
+      <div
         style={{
-          ...globalStyles,
-          color: "var(--accent)",
-          paddingTop: "100px",
+          width: "fit-content",
+          color: "white",
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginTop: "-150px",
+          marginBottom: "100px",
         }}
       >
-        <div
-          className="container"
-          style={{ marginTop: "100px", height: "200px" }}
-        >
-          <SectionHeading title="Research" />
-        </div>
-
-        <div style={{ marginTop: "-160px" }}>
-          {data.map((image, index) => (
-            <Image data={image} key={image.name} />
-          ))}
-        </div>
-      </section>
-    </>
+        Press and slide to see next
+      </div>
+    </section>
   );
 }
