@@ -115,8 +115,9 @@ export default function HomePage() {
       />
       <Hero />
       <Projects />
-      <Education />
       <Research />
+      <Education />
+
       <Awards />
 
       <Footer />
