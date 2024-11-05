@@ -59,24 +59,26 @@ function Deck() {
       const trigger = velocity > 0.2;
       const dir = xDir < 0 ? -1 : 1;
       if (!down && trigger) gone.add(index);
-      api.start((i) => {
-        if (index !== i) return;
-        const isGone = gone.has(index);
-        const x = isGone ? (200 + window.innerWidth) * dir : down ? mx : 0;
-        const rot = mx / 100 + (isGone ? dir * 10 * velocity : 0);
-        const scale = down ? 1.1 : 1;
-        return {
-          x,
-          rot,
-          scale,
-          delay: undefined,
-          config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 },
-        };
-      });
+      Promise.all(
+        api.start((i) => {
+          if (index !== i) return;
+          const isGone = gone.has(index);
+          const x = isGone ? (200 + window.innerWidth) * dir : down ? mx : 0;
+          const rot = mx / 100 + (isGone ? dir * 10 * velocity : 0);
+          const scale = down ? 1.1 : 1;
+          return {
+            x,
+            rot,
+            scale,
+            delay: undefined,
+            config: { friction: 50, tension: down ? 800 : isGone ? 200 : 500 },
+          };
+        }),
+      );
       if (!down && gone.size === data.length)
         setTimeout(() => {
           gone.clear();
-          api.start((i) => to(i));
+          Promise.all(api.start((i) => to(i)));
         }, 600);
     },
   );
