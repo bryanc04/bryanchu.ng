@@ -3,7 +3,7 @@ import type { TimelineEntry } from "../ui/timeline";
 import { FaLink } from "react-icons/fa";
 
 export const sectionHeading = {
-  title: "What I've worked on",
+  title: "Non-research Projects",
   subTitle: "",
 };
 

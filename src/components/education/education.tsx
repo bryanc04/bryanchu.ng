@@ -145,7 +145,7 @@ const data = [
 
 export default function Education() {
   return (
-    <section className="w-full bg-[#141414]">
+    <section className="w-full bg-[#141414]" style={{ paddingBottom: "350px" }}>
       <div className="container" style={{ marginBottom: "60px" }}>
         <SectionHeading title={"Education"} />
       </div>

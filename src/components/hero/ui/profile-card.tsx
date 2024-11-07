@@ -16,7 +16,10 @@ import { profileCard } from "../data";
 
 export function ProfileCard() {
   return (
-    <div className="hidden grow basis-1 justify-center lg:flex">
+    <div
+      className="hidden grow basis-1 justify-center lg:flex"
+      style={{ zIndex: 1 }}
+    >
       <BackgroundGradient containerClassName="w-fit">
         <CardContainer containerClassName="py-0">
           <CardBody className="group/card flex flex-col rounded-[22px] bg-card p-6 shadow-[-5px_-3px_#ffffff17_inset] transition-all duration-300 hover:shadow-[-2px_-2px_#ffffff17_inset]">

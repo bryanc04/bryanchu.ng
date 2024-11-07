@@ -136,6 +136,18 @@ function Deck() {
           </animated.div>
         );
       })}
+      <div
+        style={{
+          width: "fit-content",
+          color: "white",
+          marginLeft: "auto",
+          marginRight: "auto",
+          transform: "translateY(330px)",
+          paddingBottom: "100px",
+        }}
+      >
+        Press and slide left/right to see next
+      </div>{" "}
     </div>
   );
 }
@@ -150,18 +162,6 @@ export default function Research() {
         <SectionHeading title="Research" />
       </div>
       <Deck />
-      <div
-        style={{
-          width: "fit-content",
-          color: "white",
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginTop: "-150px",
-          marginBottom: "100px",
-        }}
-      >
-        Press and slide to see next
-      </div>
     </section>
   );
 }
