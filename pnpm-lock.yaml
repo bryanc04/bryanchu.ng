@@ -62,6 +62,9 @@ importers:
       '@tsparticles/slim':
         specifier: ^3.5.0
         version: 3.5.0
+      '@types/animejs':
+        specifier: ^3.1.12
+        version: 3.1.12
       '@types/nodemailer':
         specifier: ^6.4.15
         version: 6.4.15
@@ -1143,6 +1146,9 @@ packages:
 
   '@tsparticles/updater-stroke-color@3.5.0':
     resolution: {integrity: sha512-29X1zER+W9IBDv0nTD/jRXnu5rEU7uv7+W1N0B6leBipjAY24sg7Kub2SvXAaBKz6kHHWuCeccBOwIiiTpDqMA==}
+
+  '@types/animejs@3.1.12':
+    resolution: {integrity: sha512-fpdH+ZtlO0kqjTOqRaBdsEmvpRNOayI8k4EVkEtitL5l6wducDOXk0rgQgfZqWf/ZX9DzXrHf257S5i9xTcISQ==}
 
   '@types/eslint@8.56.12':
     resolution: {integrity: sha512-03ruubjWyOHlmljCVoxSuNDdmfZDzsrrz0P2LeJsOXr+ZwFQ+0yQIwNCwt/GYhV7Z31fgtXJTAEs+FYlEL851g==}
@@ -4043,6 +4049,8 @@ snapshots:
   '@tsparticles/updater-stroke-color@3.5.0':
     dependencies:
       '@tsparticles/engine': 3.5.0
+
+  '@types/animejs@3.1.12': {}
 
   '@types/eslint@8.56.12':
     dependencies:

@@ -11,7 +11,7 @@ import { Dispatch, SetStateAction } from "react";
 
 type TimelineHeadingProps = {
   entry: TimelineEntry;
-  func: any;
+  func: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export function TimelineHeading({ entry, func }: TimelineHeadingProps) {
@@ -21,7 +21,6 @@ export function TimelineHeading({ entry, func }: TimelineHeadingProps) {
   );
   const site = entry.projectUrls?.site;
 
-  console.log(func["func"]);
   return (
     <div className="flex justify-start pt-10 md:gap-10 md:pt-20">
       <div className="sticky top-40 z-40 flex max-w-xs flex-col items-center self-start md:w-full md:flex-row lg:max-w-sm">
@@ -46,7 +45,7 @@ export function TimelineHeading({ entry, func }: TimelineHeadingProps) {
               ) : (
                 <Button
                   className="shadow-[2px_2px_#00000069_inset] transition-all duration-100 ease-in-out hover:translate-x-[-1px] hover:bg-white hover:shadow-[1px_1px_#00000069_inset]"
-                  onClick={() => func["func"](true)}
+                  onClick={() => func(true)}
                 >
                   {site.icon}
                 </Button>
@@ -96,7 +95,7 @@ export function TimelineHeading({ entry, func }: TimelineHeadingProps) {
               ) : (
                 <Button
                   className="shadow-[2px_2px_#00000069_inset] transition-all duration-100 ease-in-out hover:translate-x-[-1px] hover:bg-white hover:shadow-[1px_1px_#00000069_inset]"
-                  onClick={() => func["func"](true)}
+                  onClick={() => func(true)}
                 >
                   {site.icon}
                 </Button>

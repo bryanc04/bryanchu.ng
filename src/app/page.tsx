@@ -22,15 +22,16 @@ interface PrerenderWebsiteProps {
 }
 
 export default function HomePage() {
-  const [displayGame, setDisplayGame] = React.useState(false);
+  const [displayGame, setDisplayGame] = React.useState<boolean>(false);
   const [displayGameModal, setDisplayGameModal] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
 
-  // Show the modal after 6 seconds
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      setShowModal(true);
+      if (!displayGame) {
+        setShowModal(true);
+      }
     }, 12000);
 
     return () => clearTimeout(timer);
@@ -69,7 +70,7 @@ export default function HomePage() {
           height: displayGame ? "100%" : "0%",
           backgroundColor: "rgba(0, 0, 0, 0.8)",
           zIndex: displayGame ? 999 : -1,
-          display: displayGame ? "flex" : "none",
+          display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}

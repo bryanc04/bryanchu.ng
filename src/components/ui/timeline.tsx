@@ -4,7 +4,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { sectionHeading } from "../projects/data";
 import { SectionHeading } from "./section-heading";
 import { TimelineHeading } from "./timeline-heading";
-
+interface ProjectsProps {
+  func: React.Dispatch<React.SetStateAction<boolean>>;
+}
 type ProjectUrls = {
   site?: {
     url: any;
@@ -32,13 +34,12 @@ export type TimelineEntry = {
   projectUrls?: ProjectUrls;
 };
 
-export const Timeline = ({
-  data,
-  func,
-}: {
+interface TimelineProps {
   data: TimelineEntry[];
-  func: any;
-}) => {
+  func: React.Dispatch<React.SetStateAction<boolean>>; // Type for func if it's a state setter
+}
+
+export const Timeline: React.FC<TimelineProps> = ({ data, func }) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);

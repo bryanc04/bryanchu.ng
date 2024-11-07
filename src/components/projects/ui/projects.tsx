@@ -1,7 +1,9 @@
 import { Timeline } from "~/components/ui/timeline";
 import { timelineData } from "../data";
-
-export function Projects(func: any) {
+interface ProjectsProps {
+  func: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export const Projects: React.FC<ProjectsProps> = ({ func }) => {
   return (
     <section className="relative w-full bg-gradient-to-b from-black to-[#141414]">
       <div className="px-4 md:container">
@@ -9,4 +11,4 @@ export function Projects(func: any) {
       </div>
     </section>
   );
-}
+};

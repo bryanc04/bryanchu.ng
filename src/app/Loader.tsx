@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import anime from "animejs";
 
-const LoadingScreen = () => {
+const LoadingScreen: React.FC = () => {
   const [letters] = useState("BRYAN".split(""));
   const [animationStarted, setAnimationStarted] = useState(false);
 
   useEffect(() => {
-    const timeline = anime
+    const timeline: anime.AnimeTimelineInstance = anime
       .timeline({ loop: true })
       .add({
         targets: ".ml1 .letter",
@@ -36,7 +36,10 @@ const LoadingScreen = () => {
 
     setAnimationStarted(true);
 
-    return () => timeline.pause();
+    // Cleanup: pause the timeline when the component unmounts
+    return () => {
+      timeline.pause();
+    };
   }, []);
 
   return (
