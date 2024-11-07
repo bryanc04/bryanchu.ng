@@ -1,11 +1,11 @@
 import { Timeline } from "~/components/ui/timeline";
 import { timelineData } from "../data";
 
-export function Projects() {
+export function Projects(func: any) {
   return (
     <section className="relative w-full bg-gradient-to-b from-black to-[#141414]">
       <div className="px-4 md:container">
-        <Timeline data={timelineData} />
+        <Timeline data={timelineData} func={func} />
       </div>
     </section>
   );

@@ -7,18 +7,21 @@ import type { TimelineEntry } from "./timeline";
 import { useGitHubRepoData } from "~/hooks/useGitHubRepoData";
 import { NumberTicker } from "./number-ticker";
 import { FaStar } from "react-icons/fa";
+import { Dispatch, SetStateAction } from "react";
 
 type TimelineHeadingProps = {
   entry: TimelineEntry;
+  func: any;
 };
 
-export function TimelineHeading({ entry }: TimelineHeadingProps) {
+export function TimelineHeading({ entry, func }: TimelineHeadingProps) {
   const repo = useGitHubRepoData(
     entry.projectUrls?.repo?.owner,
     entry.projectUrls?.repo?.name,
   );
   const site = entry.projectUrls?.site;
 
+  console.log(func["func"]);
   return (
     <div className="flex justify-start pt-10 md:gap-10 md:pt-20">
       <div className="sticky top-40 z-40 flex max-w-xs flex-col items-center self-start md:w-full md:flex-row lg:max-w-sm">
@@ -33,13 +36,21 @@ export function TimelineHeading({ entry }: TimelineHeadingProps) {
         >
           {entry.title}
           <div className="mt-2 flex w-full gap-5">
-            {site && (
-              <LinkPreview className="flex" url={site.url}>
-                <Button className="shadow-[2px_2px_#00000069_inset] transition-all duration-100 ease-in-out hover:translate-x-[-1px] hover:bg-white hover:shadow-[1px_1px_#00000069_inset]">
+            {site &&
+              (site.url != 1 ? (
+                <Link href={site.url} target="_blank">
+                  <Button className="shadow-[2px_2px_#00000069_inset] transition-all duration-100 ease-in-out hover:translate-x-[-1px] hover:bg-white hover:shadow-[1px_1px_#00000069_inset]">
+                    {site.icon}
+                  </Button>
+                </Link>
+              ) : (
+                <Button
+                  className="shadow-[2px_2px_#00000069_inset] transition-all duration-100 ease-in-out hover:translate-x-[-1px] hover:bg-white hover:shadow-[1px_1px_#00000069_inset]"
+                  onClick={() => func["func"](true)}
+                >
                   {site.icon}
                 </Button>
-              </LinkPreview>
-            )}
+              ))}
             {repo.url && (
               <div className="group flex items-center gap-3">
                 <LinkPreview className="flex" url={repo.url}>
@@ -75,13 +86,21 @@ export function TimelineHeading({ entry }: TimelineHeadingProps) {
         <h3 className="mb-4 block space-y-4 text-left text-2xl font-bold md:hidden">
           <span>{entry.title}</span>
           <div className="flex w-full gap-5">
-            {site && (
-              <Link href={site.url} target="_blank">
-                <Button className="shadow-[2px_2px_#00000069_inset] transition-all duration-100 ease-in-out hover:translate-x-[-1px] hover:bg-white hover:shadow-[1px_1px_#00000069_inset]">
+            {site &&
+              (site.url != 1 ? (
+                <Link href={site.url} target="_blank">
+                  <Button className="shadow-[2px_2px_#00000069_inset] transition-all duration-100 ease-in-out hover:translate-x-[-1px] hover:bg-white hover:shadow-[1px_1px_#00000069_inset]">
+                    {site.icon}
+                  </Button>
+                </Link>
+              ) : (
+                <Button
+                  className="shadow-[2px_2px_#00000069_inset] transition-all duration-100 ease-in-out hover:translate-x-[-1px] hover:bg-white hover:shadow-[1px_1px_#00000069_inset]"
+                  onClick={() => func["func"](true)}
+                >
                   {site.icon}
                 </Button>
-              </Link>
-            )}
+              ))}
             {repo.url && (
               <div className="flex items-center gap-3">
                 <Link href={repo.url} target="_blank">

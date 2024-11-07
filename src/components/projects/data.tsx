@@ -17,7 +17,7 @@ export const timelineData: TimelineEntry[] = [
         showStarCount: false,
       },
       site: {
-        url: "https://pokemon-bryanc004.web.app",
+        url: 1,
         icon: <FaLink color="red" size={20} />,
       },
     },

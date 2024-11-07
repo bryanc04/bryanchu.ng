@@ -7,7 +7,7 @@ import { TimelineHeading } from "./timeline-heading";
 
 type ProjectUrls = {
   site?: {
-    url: string;
+    url: any;
     icon: JSX.Element;
   };
   repo?: {
@@ -32,7 +32,13 @@ export type TimelineEntry = {
   projectUrls?: ProjectUrls;
 };
 
-export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
+export const Timeline = ({
+  data,
+  func,
+}: {
+  data: TimelineEntry[];
+  func: any;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -60,7 +66,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       />
       <div ref={ref} className="relative mx-auto max-w-7xl pb-20">
         {data.map((item) => (
-          <TimelineHeading key={item.title} entry={item} />
+          <TimelineHeading key={item.title} entry={item} func={func} />
         ))}
         <div
           style={{
