@@ -69,10 +69,10 @@ export default function HomePage() {
             outerScale={0}
             outerAlpha={0}
             innerStyle={{
-              backgroundColor: "white",
+              backgroundColor: "transparent",
             }}
             outerStyle={{
-              border: "3px solid white",
+              border: "0px solid transparent",
             }}
           />
           <Loader />
