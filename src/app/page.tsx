@@ -60,7 +60,14 @@ export default function HomePage() {
 
   return (
     <main className="relative">
-      {loading ? <Loader /> : <></>}
+      {loading ? (
+        <div style={{ cursor: "none" }}>
+          {" "}
+          <Loader />
+        </div>
+      ) : (
+        <></>
+      )}
       <div
         style={{
           position: "fixed",
@@ -144,7 +151,7 @@ export default function HomePage() {
               outerScale={2}
               outerAlpha={0}
               innerStyle={{
-                backgroundColor: "white",
+                backgroundColor: "red",
               }}
             />
             <ModalClose variant="plain" sx={{ m: 1 }} />
@@ -194,7 +201,7 @@ export default function HomePage() {
             outerScale={2}
             outerAlpha={0}
             innerStyle={{
-              backgroundColor: "white",
+              backgroundColor: "red",
             }}
             outerStyle={{
               border: "3px solid white",
