@@ -28,18 +28,18 @@ const data: ResearchPaper[] = [
 ];
 
 const to = (i: number) => ({
-  x: 0,
-  y: i * 4,
+  x: -20 + Math.random() * 40,
+  y: i * 4 - 10 + Math.random() * 20,
   scale: 1,
-  rot: -2 + Math.random() * 4,
+  rot: -10 + Math.random() * 20,
   delay: i * 50,
 });
 
 const from = (i: number) => ({
-  x: 0,
-  y: 0,
+  x: -20 + Math.random() * 40,
+  y: i * 4 - 10 + Math.random() * 20,
   scale: 1,
-  rot: 0,
+  rot: -10 + Math.random() * 20,
 });
 
 const trans = (r: number, s: number) =>
