@@ -133,7 +133,6 @@ const data = [
       "Leader of Go Club",
       "Software Developer for Miscellaneous Departments/Faculty/Administrators",
       "Teaching Assistant for College Level Physics",
-      "Co-Leader of Loomis Math Society",
       "Web Director of All Official/Major Publications",
       "Head Quantitative/Scientific Resource Center Tutor",
       "Tour Guide",
