@@ -27,19 +27,17 @@ const data: ResearchPaper[] = [
   },
 ];
 
-// Modified initial position function
 const to = (i: number) => ({
   x: 0,
-  y: i * 4, // Reduced spacing between cards
+  y: i * 4,
   scale: 1,
-  rot: -2 + Math.random() * 4, // Reduced rotation range for more stable appearance
-  delay: i * 50, // Reduced delay for quicker initial animation
+  rot: -2 + Math.random() * 4,
+  delay: i * 50,
 });
 
-// Modified starting position
 const from = (i: number) => ({
   x: 0,
-  y: 0, // Start from center instead of off-screen
+  y: 0,
   scale: 1,
   rot: 0,
 });
@@ -82,72 +80,76 @@ function Deck() {
   );
 
   return (
-    <div className="flex h-screen items-center justify-center">
-      {props.map(({ x, y, rot, scale }, i) => {
-        const paper = data[i];
-        if (!paper) return null;
-
-        return (
-          <animated.div
-            key={i}
-            style={{
-              x,
-              y,
-              position: "absolute",
-              width: "500px",
-              height: "600px",
-              willChange: "transform",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <animated.div
-              {...bind(i)}
-              style={{
-                transform: interpolate([rot, scale], trans),
-                width: "100%",
-                height: "100%",
-                backgroundColor: "white",
-                borderRadius: "10px",
-                padding: "20px",
-                overflow: "hidden",
-                touchAction: "none",
-                cursor: "grab",
-                willChange: "transform",
-                boxShadow: "0 12px 24px rgba(0, 0, 0, 0.2)",
-              }}
-            >
-              <div
-                className="grid grid-cols-2"
-                style={{ gridTemplateColumns: "70% 30%" }}
-              >
-                <div className="font-bold">{paper.name}</div>
-                <img src={ieee.src} className="h-20" alt="IEEE logo" />
-              </div>
-              <div className="h-4/5 overflow-hidden p-5">{paper.abstract}</div>
-              <div className="mx-auto mt-2 text-center text-sm italic">
-                Continue reading at:{" "}
-                <a href={paper.url} className="text-blue-600 underline">
-                  IEEE
-                </a>
-              </div>
-            </animated.div>
-          </animated.div>
-        );
-      })}
-      <div
+    <div className="flex h-screen flex-col items-center justify-center">
+      {/* <div
         style={{
-          width: "fit-content",
           color: "white",
-          marginLeft: "auto",
-          marginRight: "auto",
-          transform: "translateY(330px)",
-          paddingBottom: "100px",
+          textAlign: "center",
+          height: "100%",
+          position: "absolute",
         }}
       >
         Press and slide left/right to see next
-      </div>{" "}
+      </div> */}
+      <div className="relative mb-16 flex items-center justify-center">
+        {" "}
+        {/* Adjust margin for proper spacing */}
+        {props.map(({ x, y, rot, scale }, i) => {
+          const paper = data[i];
+          if (!paper) return null;
+
+          return (
+            <animated.div
+              key={i}
+              style={{
+                x,
+                y,
+                position: "absolute",
+                width: "500px",
+                height: "600px",
+                willChange: "transform",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <animated.div
+                {...bind(i)}
+                style={{
+                  transform: interpolate([rot, scale], trans),
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "white",
+                  borderRadius: "10px",
+                  padding: "20px",
+                  overflow: "hidden",
+                  touchAction: "none",
+                  cursor: "grab",
+                  willChange: "transform",
+                  boxShadow: "0 12px 24px rgba(0, 0, 0, 0.2)",
+                }}
+              >
+                <div
+                  className="grid grid-cols-2"
+                  style={{ gridTemplateColumns: "70% 30%" }}
+                >
+                  <div className="font-bold">{paper.name}</div>
+                  <img src={ieee.src} className="h-20" alt="IEEE logo" />
+                </div>
+                <div className="h-4/5 overflow-hidden p-5">
+                  {paper.abstract}
+                </div>
+                <div className="mx-auto mt-2 text-center text-sm italic">
+                  Continue reading at:{" "}
+                  <a href={paper.url} className="text-blue-600 underline">
+                    IEEE
+                  </a>
+                </div>
+              </animated.div>
+            </animated.div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -159,7 +161,11 @@ export default function Research() {
       style={{ color: "black" }}
     >
       <div className="container h-48 pt-40">
-        <SectionHeading title="Research" />
+        <SectionHeading
+          title="Research"
+          subTitle="        Hold and slide left/right to see next
+"
+        />
       </div>
       <Deck />
     </section>
