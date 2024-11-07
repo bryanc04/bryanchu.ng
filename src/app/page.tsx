@@ -62,7 +62,19 @@ export default function HomePage() {
     <main className="relative">
       {loading ? (
         <div style={{ cursor: "none" }}>
-          {" "}
+          <AnimatedCursor
+            innerSize={0}
+            outerSize={0}
+            innerScale={0}
+            outerScale={0}
+            outerAlpha={0}
+            innerStyle={{
+              backgroundColor: "white",
+            }}
+            outerStyle={{
+              border: "3px solid white",
+            }}
+          />
           <Loader />
         </div>
       ) : (
@@ -201,7 +213,7 @@ export default function HomePage() {
             outerScale={2}
             outerAlpha={0}
             innerStyle={{
-              backgroundColor: "red",
+              backgroundColor: "white",
             }}
             outerStyle={{
               border: "3px solid white",
