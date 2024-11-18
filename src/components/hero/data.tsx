@@ -39,7 +39,7 @@ export const profileCard = {
       icon: <IoLogoGithub size={20} />,
     },
     {
-      url: "https://music.apple.com/profile/cbryan2839",
+      url: "https://music.apple.com/us/playlist/music/pl.u-e98lkXqHzgzkWA1",
       icon: <IoMusicalNotesSharp size={20} />,
     },
   ],
