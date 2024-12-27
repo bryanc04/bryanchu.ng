@@ -6,7 +6,7 @@ import { Toaster } from "~/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Bryan Chung's Page",
-  description: "A Portfolio template built with Next.js",
+  description: "Check out Bryan's portfolio!",
   icons: [{ url: "/swirl.svg", rel: "icon" }],
 };
 
