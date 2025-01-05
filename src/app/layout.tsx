@@ -5,6 +5,7 @@ import { type Metadata } from "next";
 import { Toaster } from "~/components/ui/toaster";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import Script from "next/script";
+import UmamiProvider from "next-umami";
 
 export const metadata: Metadata = {
   title: "Bryan Chung's Page",
@@ -17,6 +18,9 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable} dark`}>
+      <head>
+        <UmamiProvider websiteId="82a46099-5a1f-4a72-91f1-3432319d08f8" />
+      </head>
       <body>
         {children}
         <Script id="clarity-script" strategy="afterInteractive">
