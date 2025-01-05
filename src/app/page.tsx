@@ -16,6 +16,8 @@ import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import Loader from "./Loader"; // Add this import
+import { Player } from "react-simple-player";
+import { AudioPlayer } from "react-audio-play";
 
 interface PrerenderWebsiteProps {
   url: string;
@@ -60,6 +62,40 @@ export default function HomePage() {
 
   return (
     <main className="relative">
+      <div
+        style={{
+          position: "fixed",
+          bottom: "0",
+          width: "100vw",
+          zIndex: 1000000,
+          marginLeft: "auto",
+          marginRight: "auto",
+          height: "100px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            position: "fixed",
+            bottom: "0",
+            width: "400px",
+            zIndex: 1000000,
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <AudioPlayer
+            src="/song.mp3"
+            autoPlay
+            volume={10}
+            color="white"
+            sliderColor="white"
+            style={{ backgroundColor: "transparent", color: "white" }}
+          />
+        </div>
+      </div>
+
       {loading ? (
         <div style={{ cursor: "none" }}>
           <AnimatedCursor
