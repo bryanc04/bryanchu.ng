@@ -75,7 +75,7 @@ export default function HomePage() {
           justifyContent: "center",
         }}
       >
-        <div
+        {/* <div
           style={{
             position: "fixed",
             bottom: "0",
@@ -93,7 +93,7 @@ export default function HomePage() {
             sliderColor="white"
             style={{ backgroundColor: "transparent", color: "white" }}
           />
-        </div>
+        </div> */}
       </div>
 
       {loading ? (
