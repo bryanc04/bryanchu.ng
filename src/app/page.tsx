@@ -167,7 +167,7 @@ export default function HomePage() {
         </button>
       </div>
 
-      {showModal && (
+      {showModal && !showModal && (
         <Modal
           aria-labelledby="modal-title"
           aria-describedby="modal-desc"
