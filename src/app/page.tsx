@@ -22,12 +22,47 @@ import { AudioPlayer } from "react-audio-play";
 interface PrerenderWebsiteProps {
   url: string;
 }
+const sections = ["home", "projects", "research", "education", "awards"];
 
 export default function HomePage() {
   const [displayGame, setDisplayGame] = React.useState<boolean>(false);
   const [displayGameModal, setDisplayGameModal] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
+  const [activeSection, setActiveSection] = React.useState<string>("hero");
+  const navbarRef = React.useRef<HTMLUListElement | null>(null);
+
+  React.useEffect(() => {
+    const observerOptions = {
+      root: null, // Use the viewport as the root
+      rootMargin: "-50% 0% -50% 0%", // Ensures 60% of the screen is considered
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id); // Update active section
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions,
+    );
+
+    // Observe all sections
+    sections.forEach((sectionId) => {
+      const section = document.getElementById(sectionId);
+      if (section) observer.observe(section);
+    });
+
+    return () => {
+      // Cleanup observer on unmount
+      observer.disconnect();
+    };
+  }, []);
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
@@ -47,6 +82,27 @@ export default function HomePage() {
     return () => clearTimeout(timer);
   }, []);
 
+  React.useEffect(() => {
+    // Adjust navbar position to center the active link
+    const navbar = navbarRef.current;
+    const activeLink = document.querySelector(`#navbar-item-${activeSection}`);
+
+    if (navbar && activeLink) {
+      const navbarRect = navbar.getBoundingClientRect();
+      const activeLinkRect = activeLink.getBoundingClientRect();
+
+      // Calculate the offset to center the active link
+      const offset =
+        activeLinkRect.top -
+        navbarRect.top -
+        navbarRect.height / 2 +
+        activeLinkRect.height / 2;
+
+      // Apply the transform to the navbar
+      navbar.style.transform = `translateY(${-offset - 10}px)`;
+    }
+  }, [activeSection]);
+
   // Handle scroll locking when game is displayed
   React.useEffect(() => {
     if (displayGame) {
@@ -62,6 +118,83 @@ export default function HomePage() {
 
   return (
     <main className="relative">
+      <AnimatedCursor
+        innerSize={8}
+        outerSize={35}
+        innerScale={1}
+        outerScale={2}
+        outerAlpha={0}
+        innerStyle={{
+          backgroundColor: "white",
+        }}
+      />
+      {!loading && (
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: 0,
+            transform: "translateY(-50%)", // Start vertically centered
+            width: "200px",
+            height: "100vh",
+            backgroundColor: "transparent",
+            color: "white",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1000,
+            overflow: "hidden",
+          }}
+        >
+          {" "}
+          <AnimatedCursor
+            innerSize={8}
+            outerSize={35}
+            innerScale={1}
+            outerScale={2}
+            outerAlpha={0}
+            innerStyle={{
+              backgroundColor: "white",
+            }}
+          />
+          <nav>
+            <ul
+              ref={navbarRef}
+              style={{
+                listStyleType: "none",
+                padding: 0,
+                textAlign: "center",
+                overflow: "auto",
+                maxHeight: "100%",
+              }}
+            >
+              {sections.map((section) => (
+                <li
+                  id={`navbar-item-${section}`}
+                  key={section}
+                  style={{ marginBottom: "20px" }}
+                >
+                  <Link
+                    href={`#${section}`}
+                    scroll={true}
+                    style={{
+                      color: "white",
+                      textDecoration: "none",
+                      fontSize:
+                        activeSection === section ? "1.25rem" : "0.75rem",
+                      fontWeight: activeSection === section ? "bold" : "normal",
+                      transition: "all 0.3s ease-in-out",
+                    }}
+                  >
+                    {section.charAt(0).toUpperCase() + section.slice(1)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      )}
       <div
         style={{
           position: "fixed",
@@ -130,17 +263,6 @@ export default function HomePage() {
           alignItems: "center",
         }}
       >
-        {" "}
-        <AnimatedCursor
-          innerSize={8}
-          outerSize={35}
-          innerScale={1}
-          outerScale={2}
-          outerAlpha={0}
-          innerStyle={{
-            backgroundColor: "white",
-          }}
-        />
         <Iframe
           url="https://pokemon-bryanc004.web.app"
           styles={{
@@ -256,12 +378,24 @@ export default function HomePage() {
             }}
           />
           <Link href="https://pokemon-bryanc004.web.app" prefetch={true}></Link>
-          <Hero />
-          <Projects func={setDisplayGame} />
-          <Research />
-          <Education />
-          <Awards />
-          <Footer />
+          <div id="home">
+            <Hero />
+          </div>
+          <div id="projects">
+            <Projects func={setDisplayGame} />
+          </div>
+          <div id="research">
+            <Research />
+          </div>
+          <div id="education">
+            <Education />
+          </div>
+          <div id="awards">
+            <Awards />
+          </div>
+          <div id="footer">
+            <Footer />
+          </div>
         </>
       )}
     </main>
