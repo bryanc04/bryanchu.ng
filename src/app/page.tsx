@@ -158,41 +158,44 @@ export default function HomePage() {
               backgroundColor: "white",
             }}
           />
-          <nav>
-            <ul
-              ref={navbarRef}
-              style={{
-                listStyleType: "none",
-                padding: 0,
-                textAlign: "center",
-                overflow: "auto",
-                maxHeight: "100%",
-              }}
-            >
-              {sections.map((section) => (
-                <li
-                  id={`navbar-item-${section}`}
-                  key={section}
-                  style={{ marginBottom: "20px" }}
-                >
-                  <Link
-                    href={`#${section}`}
-                    scroll={true}
-                    style={{
-                      color: "white",
-                      textDecoration: "none",
-                      fontSize:
-                        activeSection === section ? "1.25rem" : "0.75rem",
-                      fontWeight: activeSection === section ? "bold" : "normal",
-                      transition: "all 0.3s ease-in-out",
-                    }}
+          {activeSection != "home" && (
+            <nav>
+              <ul
+                ref={navbarRef}
+                style={{
+                  listStyleType: "none",
+                  padding: 0,
+                  textAlign: "center",
+                  overflow: "auto",
+                  maxHeight: "100%",
+                }}
+              >
+                {sections.map((section) => (
+                  <li
+                    id={`navbar-item-${section}`}
+                    key={section}
+                    style={{ marginBottom: "20px" }}
                   >
-                    {section.charAt(0).toUpperCase() + section.slice(1)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+                    <Link
+                      href={`#${section}`}
+                      scroll={true}
+                      style={{
+                        color: "white",
+                        textDecoration: "none",
+                        fontSize:
+                          activeSection === section ? "1.25rem" : "0.75rem",
+                        fontWeight:
+                          activeSection === section ? "bold" : "normal",
+                        transition: "all 0.3s ease-in-out",
+                      }}
+                    >
+                      {section.charAt(0).toUpperCase() + section.slice(1)}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
         </div>
       )}
       <div
