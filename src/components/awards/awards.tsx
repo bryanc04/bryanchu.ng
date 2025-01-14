@@ -8,6 +8,11 @@ import usaco from "public/images/usaco.png";
 import teams from "public/images/teams.png";
 import nontrivial from "public/images/nontrivial.svg";
 import aapt from "public/images/aapt.jpg";
+import maa from "public/images/maa.png";
+import hosa from "public/images/hosa.png";
+import csef from "public/images/csef.png";
+import music from "public/images/music.png";
+import ccir from "public/images/ccir.png";
 
 export default function Awards() {
   const data = [
@@ -23,6 +28,22 @@ export default function Awards() {
     ["$1000 + $500 (3rd Place) Award | The Non-Trivial Fellowship", nontrivial],
     ["Junior Math Departmental Award | Loomis Chaffee School", loomisLogo],
     ["Junior Science Departmental Award | Loomis Chaffee School", loomisLogo],
+    ["CCIR STEM Scholar | Camrbidge Centre for International Research", ccir],
+    [
+      "American Invitational Mathematics Examination (AIME) Qualifier | MAA",
+      maa,
+    ],
+    ["Finalist/Medalist | Connecticut Science and Engineering Fair", csef],
+    ["3rd Place in CT/Internationals Qualifier | HOSA Math", hosa],
+    ["Top 100 Kendrick Lamar Listener of 2024 | Apple Music", music],
+    ["3x Math Departmental Honors | Loomis Chaffee School", loomisLogo],
+    ["2x Science Departmental Honors | Loomis Chaffee School", loomisLogo],
+    [
+      "2x Social Science Departmental Honors | Loomis Chaffee School",
+      loomisLogo,
+    ],
+
+    ["English Departmental Honor | Loomis Chaffee School", loomisLogo],
   ];
 
   const containerVariants = {
