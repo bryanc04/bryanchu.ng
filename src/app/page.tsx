@@ -128,76 +128,7 @@ export default function HomePage() {
           backgroundColor: "white",
         }}
       />
-      {!loading && (
-        <div
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: 0,
-            transform: "translateY(-50%)", // Start vertically centered
-            width: "200px",
-            height: "100vh",
-            backgroundColor: "transparent",
-            color: "white",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 1000,
-            overflow: "hidden",
-          }}
-        >
-          {" "}
-          <AnimatedCursor
-            innerSize={8}
-            outerSize={35}
-            innerScale={1}
-            outerScale={2}
-            outerAlpha={0}
-            innerStyle={{
-              backgroundColor: "white",
-            }}
-          />
-          {activeSection != "home" && (
-            <nav>
-              <ul
-                ref={navbarRef}
-                style={{
-                  listStyleType: "none",
-                  padding: 0,
-                  textAlign: "center",
-                  overflow: "auto",
-                  maxHeight: "100%",
-                }}
-              >
-                {sections.map((section) => (
-                  <li
-                    id={`navbar-item-${section}`}
-                    key={section}
-                    style={{ marginBottom: "20px" }}
-                  >
-                    <Link
-                      href={`#${section}`}
-                      scroll={true}
-                      style={{
-                        color: "white",
-                        textDecoration: "none",
-                        fontSize:
-                          activeSection === section ? "1.25rem" : "0.75rem",
-                        fontWeight:
-                          activeSection === section ? "bold" : "normal",
-                        transition: "all 0.3s ease-in-out",
-                      }}
-                    >
-                      {section.charAt(0).toUpperCase() + section.slice(1)}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          )}
-        </div>
-      )}
+
       <div
         style={{
           position: "fixed",
@@ -255,7 +186,7 @@ export default function HomePage() {
       <div
         style={{
           position: "fixed",
-          top: 0,
+          top: -10000000000,
           left: 0,
           width: displayGame ? "100%" : "0%",
           height: displayGame ? "100%" : "0%",
@@ -381,23 +312,100 @@ export default function HomePage() {
             }}
           />
           <Link href="https://pokemon-bryanc004.web.app" prefetch={true}></Link>
-          <div id="home">
-            <Hero />
-          </div>
-          <div id="projects">
-            <Projects func={setDisplayGame} />
-          </div>
-          <div id="research">
-            <Research />
-          </div>
-          <div id="education">
-            <Education />
-          </div>
-          <div id="awards">
-            <Awards />
-          </div>
-          <div id="footer">
-            <Footer />
+          <div style={{ gridTemplateColumns: "10% 90%", display: "grid" }}>
+            <div>
+              {!loading && (
+                <div
+                  style={{
+                    position: "fixed",
+                    top: "50%",
+                    left: 0,
+                    transform: "translateY(-50%)", // Start vertically centered
+                    width: "auto",
+                    height: "100vh",
+                    backgroundColor: "transparent",
+                    color: "white",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    zIndex: 1000,
+                    overflow: "hidden",
+                    padding: "30px",
+                  }}
+                >
+                  {" "}
+                  <AnimatedCursor
+                    innerSize={8}
+                    outerSize={35}
+                    innerScale={1}
+                    outerScale={2}
+                    outerAlpha={0}
+                    innerStyle={{
+                      backgroundColor: "white",
+                    }}
+                  />
+                  <nav>
+                    <ul
+                      ref={navbarRef}
+                      style={{
+                        listStyleType: "none",
+                        padding: 0,
+                        textAlign: "center",
+                        overflow: "auto",
+                        maxHeight: "100%",
+                      }}
+                    >
+                      {sections.map((section) => (
+                        <li
+                          id={`navbar-item-${section}`}
+                          key={section}
+                          style={{ marginBottom: "20px" }}
+                        >
+                          <Link
+                            href={`#${section}`}
+                            scroll={true}
+                            style={{
+                              color: "white",
+                              textDecoration: "none",
+                              fontSize:
+                                activeSection === section
+                                  ? "1.25rem"
+                                  : "0.75rem",
+                              fontWeight:
+                                activeSection === section ? "bold" : "normal",
+                              transition: "all 0.3s ease-in-out",
+                            }}
+                          >
+                            {section.charAt(0).toUpperCase() + section.slice(1)}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+                </div>
+              )}
+            </div>
+            <div>
+              <div id="home">
+                <Hero />
+              </div>
+              <div id="projects">
+                <Projects func={setDisplayGame} />
+              </div>
+              <div id="research">
+                <Research />
+              </div>
+              <div id="education">
+                <Education />
+              </div>
+              <div id="awards">
+                <Awards />
+              </div>
+              <div id="footer">
+                <Footer />
+              </div>
+            </div>
           </div>
         </>
       )}
