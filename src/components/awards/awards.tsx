@@ -26,6 +26,8 @@ export default function Awards() {
     ],
     ["USACO Platnium Division | USA Computing Olympiad", usaco],
     ["$1000 + $500 (3rd Place) Award | The Non-Trivial Fellowship", nontrivial],
+    ["First Place/Highest Scorer on AMC 12 | MAA/Loomis Chaffee School", maa],
+
     ["Junior Math Departmental Award | Loomis Chaffee School", loomisLogo],
     ["Junior Science Departmental Award | Loomis Chaffee School", loomisLogo],
     ["CCIR STEM Scholar | Camrbidge Centre for International Research", ccir],
@@ -71,7 +73,7 @@ export default function Awards() {
   };
 
   return (
-    <section className="w-full bg-[#141414]">
+    <section className="w-full bg-[#141414] pb-[100px] pt-[150px]">
       <div className="container mb-16">
         <SectionHeading title="Awards" />
       </div>

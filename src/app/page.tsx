@@ -22,7 +22,7 @@ import { AudioPlayer } from "react-audio-play";
 interface PrerenderWebsiteProps {
   url: string;
 }
-const sections = ["home", "projects", "research", "awards", "education"];
+const sections = ["home", "projects", "experiences", "awards", "research"];
 
 export default function HomePage() {
   const [displayGame, setDisplayGame] = React.useState<boolean>(false);
@@ -393,14 +393,15 @@ export default function HomePage() {
               <div id="projects">
                 <Projects func={setDisplayGame} />
               </div>
-              <div id="research">
-                <Research />
+              <div id="experiences">
+                <Education />
               </div>
               <div id="awards">
                 <Awards />
               </div>
-              <div id="education">
-                <Education />
+
+              <div id="research">
+                <Research />
               </div>
 
               <div id="footer">
