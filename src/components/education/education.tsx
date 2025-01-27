@@ -219,6 +219,7 @@ const TimelineAnimation = () => {
           <div className="pt-[150px]">
             {events.map((event, index) => (
               <h3
+                key={index}
                 className={`timeline-text mb-2 text-2xl font-bold text-white timeline-text-${index} opacity-0`}
               >
                 {event}
