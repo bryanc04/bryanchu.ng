@@ -72,20 +72,22 @@ const TimelineAnimation = () => {
     // Create the main timeline
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: "#svg-stage",
+        trigger: "#hi",
         scrub: 1,
-        start: "top 75%",
+        start: "top bottom",
         end: "bottom center",
         markers: true, // For debugging
+        invalidateOnRefresh: true,
       },
     });
     const tl1 = gsap.timeline({
       scrollTrigger: {
-        trigger: "#svg-stage",
+        trigger: "#hi",
         scrub: 1,
-        start: "top 75%",
+        start: "top bottom",
         end: "bottom center",
         markers: true, // For debugging
+        invalidateOnRefresh: true,
       },
     });
 
@@ -121,9 +123,15 @@ const TimelineAnimation = () => {
         index * 0.1,
       );
     });
+    const interval = setInterval(() => {
+      ScrollTrigger.refresh();
+      console.log("ScrollTrigger refreshed");
+    }, 1000); // 1-second interval
 
     return () => {
       tl.kill();
+      tl1.kill();
+      clearInterval(interval); // Cleanup the interval
     };
   }, []);
 
@@ -132,7 +140,7 @@ const TimelineAnimation = () => {
       <SectionHeading title={"Experiences"} />
 
       <div className="grid grid-cols-[60%_40%]">
-        <div>
+        <div id="hi">
           <svg
             id="svg-stage"
             ref={svgRef}
