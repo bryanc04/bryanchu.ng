@@ -74,16 +74,18 @@ const TimelineAnimation = () => {
       scrollTrigger: {
         trigger: "#svg-stage",
         scrub: 1,
-        start: "top center",
+        start: "top 75%",
         end: "bottom center",
+        markers: true, // For debugging
       },
     });
     const tl1 = gsap.timeline({
       scrollTrigger: {
         trigger: "#svg-stage",
         scrub: 1,
-        start: "top center",
+        start: "top 75%",
         end: "bottom center",
+        markers: true, // For debugging
       },
     });
 
@@ -126,7 +128,7 @@ const TimelineAnimation = () => {
   }, []);
 
   return (
-    <div className="w-full bg-[#141414] font-sans text-white">
+    <div className="mt-[300px] w-full bg-[#141414] font-sans text-white">
       <SectionHeading title={"Experiences"} />
 
       <div className="grid grid-cols-[60%_40%]">

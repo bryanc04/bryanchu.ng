@@ -186,7 +186,7 @@ export default function HomePage() {
       <div
         style={{
           position: "fixed",
-          top: -10000000000,
+          top: displayGame ? 0 : -10000000000,
           left: 0,
           width: displayGame ? "100%" : "0%",
           height: displayGame ? "100%" : "0%",
@@ -287,6 +287,7 @@ export default function HomePage() {
                 onClick={() => {
                   setDisplayGame(true);
                   setShowModal(false);
+                  console.log("showing game");
                 }}
               >
                 Yes!
