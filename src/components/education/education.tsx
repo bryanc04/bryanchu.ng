@@ -76,7 +76,6 @@ const TimelineAnimation = () => {
         scrub: 1,
         start: "top bottom",
         end: "bottom center",
-        markers: true, // For debugging
         invalidateOnRefresh: true,
       },
     });
@@ -86,7 +85,6 @@ const TimelineAnimation = () => {
         scrub: 1,
         start: "top bottom",
         end: "bottom center",
-        markers: true, // For debugging
         invalidateOnRefresh: true,
       },
     });

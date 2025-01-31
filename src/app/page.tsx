@@ -312,7 +312,6 @@ export default function HomePage() {
               border: "3px solid white",
             }}
           />
-          <Link href="https://pokemon-bryanc004.web.app" prefetch={true}></Link>
           <div style={{ gridTemplateColumns: "10% 90%", display: "grid" }}>
             <div>
               {!loading && (
