@@ -31,6 +31,23 @@ export default function HomePage() {
   const [loading, setLoading] = React.useState(true);
   const [activeSection, setActiveSection] = React.useState<string>("hero");
   const navbarRef = React.useRef<HTMLUListElement | null>(null);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  // Add useEffect to check screen size
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // 768px is a common breakpoint for mobile devices
+    };
+
+    // Check initially
+    checkMobile();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", checkMobile);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   React.useEffect(() => {
     const observerOptions = {
@@ -312,80 +329,87 @@ export default function HomePage() {
               border: "3px solid white",
             }}
           />
-          <div style={{ gridTemplateColumns: "10% 90%", display: "grid" }}>
-            <div>
-              {!loading && (
-                <div
-                  style={{
-                    position: "fixed",
-                    top: "50%",
-                    left: 0,
-                    transform: "translateY(-50%)", // Start vertically centered
-                    width: "auto",
-                    height: "100vh",
-                    backgroundColor: "transparent",
-                    color: "white",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    zIndex: 1000,
-                    overflow: "hidden",
-                    padding: "30px",
-                  }}
-                >
-                  {" "}
-                  <AnimatedCursor
-                    innerSize={8}
-                    outerSize={35}
-                    innerScale={1}
-                    outerScale={2}
-                    outerAlpha={0}
-                    innerStyle={{
-                      backgroundColor: "white",
+          <div
+            style={{
+              gridTemplateColumns: isMobile ? "100%" : "13% 87%",
+              display: "grid",
+            }}
+          >
+            {!isMobile && (
+              <div style={{ backgroundColor: "black" }}>
+                {!loading && (
+                  <div
+                    style={{
+                      position: "sticky",
+                      top: "50%",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      transform: "translateY(-50%)",
+                      width: "auto",
+                      height: "100vh",
+                      backgroundColor: "transparent",
+                      color: "white",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      zIndex: 1000,
+                      overflow: "hidden",
                     }}
-                  />
-                  <nav>
-                    <ul
-                      ref={navbarRef}
-                      style={{
-                        listStyleType: "none",
-                        padding: 0,
-                        textAlign: "center",
-                        overflow: "auto",
-                        maxHeight: "100%",
+                  >
+                    <AnimatedCursor
+                      innerSize={8}
+                      outerSize={35}
+                      innerScale={1}
+                      outerScale={2}
+                      outerAlpha={0}
+                      innerStyle={{
+                        backgroundColor: "white",
                       }}
-                    >
-                      {sections.map((section) => (
-                        <li
-                          id={`navbar-item-${section}`}
-                          key={section}
-                          style={{ marginBottom: "20px" }}
-                        >
-                          <Link
-                            href={`#${section}`}
-                            scroll={true}
-                            style={{
-                              color: "white",
-                              textDecoration: "none",
-                              fontSize:
-                                activeSection === section
-                                  ? "1.25rem"
-                                  : "0.75rem",
-                              fontWeight:
-                                activeSection === section ? "bold" : "normal",
-                              transition: "all 0.3s ease-in-out",
-                            }}
+                    />
+                    <nav>
+                      <ul
+                        ref={navbarRef}
+                        style={{
+                          listStyleType: "none",
+                          padding: 0,
+                          textAlign: "center",
+                          overflow: "auto",
+                          maxHeight: "100%",
+                        }}
+                      >
+                        {sections.map((section) => (
+                          <li
+                            id={`navbar-item-${section}`}
+                            key={section}
+                            style={{ marginBottom: "20px" }}
                           >
-                            {section.charAt(0).toUpperCase() + section.slice(1)}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
-                </div>
-              )}
-            </div>
+                            <Link
+                              href={`#${section}`}
+                              scroll={true}
+                              style={{
+                                color: "white",
+                                textDecoration: "none",
+                                fontSize:
+                                  activeSection === section
+                                    ? "1rem"
+                                    : "0.75rem",
+                                fontWeight:
+                                  activeSection === section ? "bold" : "normal",
+                                transition: "all 0.5s ease-in-out",
+                              }}
+                            >
+                              {section.charAt(0).toUpperCase() +
+                                section.slice(1)}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </nav>
+                  </div>
+                )}
+              </div>
+            )}
             <div>
               <div id="home">
                 <Hero />
@@ -399,11 +423,9 @@ export default function HomePage() {
               <div id="awards">
                 <Awards />
               </div>
-
               <div id="research">
                 <Research />
               </div>
-
               <div id="footer">
                 <Footer />
               </div>

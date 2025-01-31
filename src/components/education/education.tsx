@@ -22,8 +22,8 @@ const events = [
   "Web Dir. of The Log @ Loomis",
   "Web Dir. of The Hourglass @ Loomis",
   "Web Dir. of STEM Mag. @ Loomis",
-  "AI Committee @ Loomis",
-  "Advisor to the HS @ Loomis",
+  "Advisor to faculty AI Committee @ Loomis",
+  "Advisor to the HoS @ Loomis",
   "Software Developer @ Loomis",
   "Advisor to Financial Literacy @ Loomis",
   "TA for CL Physics @ Loomis",
@@ -118,7 +118,7 @@ const TimelineAnimation = () => {
           y: 0,
           duration: 0.5,
         },
-        index * 0.1,
+        index * 0.05,
       );
     });
     const interval = setInterval(() => {
