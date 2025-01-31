@@ -134,7 +134,7 @@ const TimelineAnimation = () => {
   }, []);
 
   return (
-    <div className="mt-[300px] w-full bg-[#141414] font-sans text-white">
+    <div className="w-full bg-[#141414] pt-[300px] font-sans text-white">
       <SectionHeading title={"Experiences"} />
 
       <div className="grid grid-cols-[60%_40%]">
