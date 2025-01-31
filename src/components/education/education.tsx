@@ -74,7 +74,7 @@ const TimelineAnimation = () => {
       scrollTrigger: {
         trigger: "#hi",
         scrub: 1,
-        start: "top bottom",
+        start: "top center",
         end: "bottom center",
         invalidateOnRefresh: true,
       },
@@ -83,7 +83,7 @@ const TimelineAnimation = () => {
       scrollTrigger: {
         trigger: "#hi",
         scrub: 1,
-        start: "top bottom",
+        start: "top center",
         end: "bottom center",
         invalidateOnRefresh: true,
       },
