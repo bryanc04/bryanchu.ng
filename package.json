@@ -45,7 +45,6 @@
     "marked-react": "^2.0.0",
     "mini-svg-data-uri": "^1.4.4",
     "next": "15.0.3-canary.8",
-    "next-umami": "^0.0.4",
     "nodemailer": "^6.9.15",
     "npm": "^10.9.0",
     "prop-types": "^15.8.1",
