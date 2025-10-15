@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,7 +14,6 @@ const events = [
   "Head QSRC Tutor @ Loomis",
   "Volunteer ISA @ Loomis",
   "Tour Guide @ Loomis",
-
   "Web Dir. of The Log @ Loomis",
   "Web Dir. of The Hourglass @ Loomis",
   "Web Dir. of STEM Mag. @ Loomis",
@@ -60,7 +61,7 @@ const TimelineAnimation = () => {
       .to(".ball04, .text03", {}, 0.15)
       .to(".ball05, .text04", {}, 0.2)
       .to(".ball06, .text05", {}, 0.25);
-    // Create the main timeline
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: "#svg-stage",
@@ -70,15 +71,8 @@ const TimelineAnimation = () => {
       },
     });
 
-    // Initial ball visibility
     tl.set(".ball01", { opacity: 1 }, 0);
-
-    // Animate the path drawing
     tl.to(line, { strokeDashoffset: 0, duration: 2 }, 0);
-
-    // Track the moving ball position and trigger checkpoints
-
-    // Animate the ball along the path
     tl.to(
       ".ball01",
       {
@@ -91,6 +85,7 @@ const TimelineAnimation = () => {
       0,
     );
     tl.add(pulses, 0);
+
     events.forEach((_, index) => {
       tl.to(
         `.timeline-text-${index}`,
@@ -199,10 +194,12 @@ const TimelineAnimation = () => {
             />
           </svg>
         </div>
+
         <div>
           <div className="pt-[150px]">
             {events.map((event, index) => (
               <h3
+                key={index}
                 className={`timeline-text mb-2 text-2xl font-bold text-white timeline-text-${index} opacity-0`}
               >
                 {event}
