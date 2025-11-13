@@ -6,16 +6,15 @@ export const title = {
   plainText: "Bryan Chung",
   glowText: "Bryan Chung",
   subTitle: [
-    "Senior at the Loomis Chaffee School",
-    "Teaching Assistant at the Loomis Chaffee School",
-    "Soccer/Tennis Player",
+    "Freshman at Brown University",
+    "Alumnus of Loomis Chaffee School",
     "AI Researcher",
     "Go Player",
     "Dog Owner",
     "Kendrick Lamar Fan",
   ],
   highlight: [
-    "Senior",
+    "Brown",
     "Loomis",
     "Chaffee",
     "School",
@@ -44,8 +43,8 @@ export const profileCard = {
     },
   ],
   tooltip: {
-    imagePath: "https://i.postimg.cc/Z5Cxqh1s/IMG-1626-7.jpg",
+    imagePath: "https://i.postimg.cc/fWYrdyMg/11.jpg",
     title: "Hey,",
-    subTitle: "That's me (and Lexi)!",
+    subTitle: "That's me!",
   },
 };
