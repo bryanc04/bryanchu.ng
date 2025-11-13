@@ -9,16 +9,12 @@ export const sectionHeading = {
 
 export const timelineData: TimelineEntry[] = [
   {
-    title: "Poke-dog Game Portfolio",
+    title: "Custom Pokemon Game Portfolio",
     projectUrls: {
       repo: {
         owner: "bryanc04",
         name: "bryanchu.ng",
         showStarCount: false,
-      },
-      site: {
-        url: 1,
-        icon: <FaLink color="red" size={20} />,
       },
     },
     imageUrl: "/images/pokemon.png",
