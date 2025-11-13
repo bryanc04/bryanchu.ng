@@ -14,7 +14,7 @@ const LoadingScreen: React.FC = () => {
         opacity: [0, 1],
         translateZ: 0,
         easing: "easeOutExpo",
-        duration: 600,
+        duration: 300,
         delay: (el, i) => 70 * (i + 1),
       })
       .add({
@@ -22,16 +22,16 @@ const LoadingScreen: React.FC = () => {
         scaleX: [0, 1],
         opacity: [0.5, 1],
         easing: "easeOutExpo",
-        duration: 700,
+        duration: 350,
         offset: "-=875",
         delay: (el, i, l) => 80 * (l - i),
       })
       .add({
         targets: ".ml1",
         opacity: 0,
-        duration: 1000,
+        duration: 500,
         easing: "easeOutExpo",
-        delay: 1000,
+        delay: 500,
       });
 
     setAnimationStarted(true);
