@@ -30,8 +30,8 @@ export const title = {
 
 export const profileCard = {
   title: "Bryan Chung",
-  subTitle: "High School Student",
-  body: `Student passionate in artificial intelligence, software development, quantum informatics, physics, math, and teaching. Always looking for ways to deliver impact through computer science. Also a researcher, teaching assistant, athlete, dog-lover, and avid Kendrick Lamar fan.`,
+  subTitle: "Freshman at Brown University",
+  body: `Student passionate in software engineering, artificial intelligence, quantum informatics, physics, math, and teaching. Always looking for ways to deliver impact through computer science. Also a researcher, teaching assistant, athlete, dog-lover, and avid Kendrick Lamar fan.`,
   socialUrls: [
     {
       url: "https://github.com/bryanc04",

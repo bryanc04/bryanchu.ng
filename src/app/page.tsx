@@ -63,7 +63,7 @@ export default function HomePage() {
   React.useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 700);
     return () => clearTimeout(timer);
   }, []);
 
@@ -120,83 +120,10 @@ export default function HomePage() {
           />
           <div
             style={{
-              gridTemplateColumns: isMobile ? "100%" : "13% 87%",
+              gridTemplateColumns: isMobile ? "100%" : "100%",
               display: "grid",
             }}
           >
-            {!isMobile && (
-              <div style={{ backgroundColor: "black" }}>
-                {!loading && (
-                  <div
-                    style={{
-                      position: "sticky",
-                      top: "50%",
-                      marginLeft: "auto",
-                      marginRight: "auto",
-                      transform: "translateY(-50%)",
-                      width: "auto",
-                      height: "100vh",
-                      backgroundColor: "transparent",
-                      color: "white",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      zIndex: 1000,
-                      overflow: "hidden",
-                    }}
-                  >
-                    <AnimatedCursor
-                      innerSize={8}
-                      outerSize={35}
-                      innerScale={1}
-                      outerScale={2}
-                      outerAlpha={0}
-                      innerStyle={{ backgroundColor: "white" }}
-                    />
-                    <nav>
-                      <ul
-                        ref={navbarRef}
-                        style={{
-                          listStyleType: "none",
-                          padding: 0,
-                          textAlign: "center",
-                          overflow: "auto",
-                          maxHeight: "100%",
-                        }}
-                      >
-                        {sections.map((section) => (
-                          <li
-                            id={`navbar-item-${section}`}
-                            key={section}
-                            style={{ marginBottom: "20px" }}
-                          >
-                            <Link
-                              href={`#${section}`}
-                              scroll={true}
-                              style={{
-                                color: "white",
-                                textDecoration: "none",
-                                fontSize:
-                                  activeSection === section
-                                    ? "1rem"
-                                    : "0.75rem",
-                                fontWeight:
-                                  activeSection === section ? "bold" : "normal",
-                                transition: "all 0.5s ease-in-out",
-                              }}
-                            >
-                              {section.charAt(0).toUpperCase() +
-                                section.slice(1)}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </nav>
-                  </div>
-                )}
-              </div>
-            )}
             <div>
               <div id="home">
                 <Hero />

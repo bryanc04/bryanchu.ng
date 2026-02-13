@@ -7,36 +7,33 @@ const LoadingScreen: React.FC = () => {
 
   useEffect(() => {
     const timeline: anime.AnimeTimelineInstance = anime
-      .timeline({ loop: true })
+      .timeline({ loop: false })
       .add({
         targets: ".ml1 .letter",
-        scale: [0.3, 1],
+        scale: [0.7, 1],
         opacity: [0, 1],
-        translateZ: 0,
-        easing: "easeOutExpo",
-        duration: 300,
-        delay: (el, i) => 70 * (i + 1),
+        easing: "easeOutQuad",
+        duration: 120,
+        delay: (el, i) => 12 * i,
       })
       .add({
         targets: ".ml1 .line",
         scaleX: [0, 1],
         opacity: [0.5, 1],
-        easing: "easeOutExpo",
-        duration: 350,
-        offset: "-=875",
-        delay: (el, i, l) => 80 * (l - i),
+        easing: "easeOutQuad",
+        duration: 100,
+        offset: "-=90",
       })
       .add({
         targets: ".ml1",
         opacity: 0,
-        duration: 500,
-        easing: "easeOutExpo",
-        delay: 500,
+        duration: 120,
+        easing: "easeInQuad",
+        delay: 100,
       });
 
     setAnimationStarted(true);
 
-    // Cleanup: pause the timeline when the component unmounts
     return () => {
       timeline.pause();
     };
@@ -44,17 +41,33 @@ const LoadingScreen: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
-      <div className={`ml1 ${animationStarted ? "visible" : "invisible"}`}>
-        <div className="text-wrapper">
-          <div className="line line1"></div>
-          <div className="letters">
-            {letters.map((letter, index) => (
-              <span key={index} className="letter">
-                {letter}
-              </span>
-            ))}
+      <div className="flex flex-col items-center">
+        <div className={`ml1 ${animationStarted ? "visible" : "invisible"}`}>
+          <div className="text-wrapper">
+            <div className="line line1"></div>
+            <div className="letters">
+              {letters.map((letter, index) => (
+                <span key={index} className="letter">
+                  {letter}
+                </span>
+              ))}
+            </div>
+            <div className="line line2"></div>
           </div>
-          <div className="line line2"></div>
+        </div>
+
+        <div className="image-slot">
+          <img
+            src="/images/brown_logo.png"
+            alt="profile"
+            className="profile-image"
+            style={{
+              maxWidth: "120px",
+              maxHeight: "120px",
+              objectFit: "contain",
+              display: "block",
+            }}
+          />
         </div>
       </div>
 
@@ -63,20 +76,19 @@ const LoadingScreen: React.FC = () => {
           font-weight: 900;
           font-size: 3.5em;
           color: white;
+          margin-bottom: 20px;
         }
 
         .ml1 .letter {
           display: inline-block;
           line-height: 1em;
-          opacity: 0; /* Ensure letters are initially invisible */
+          opacity: 0;
         }
 
         .ml1 .text-wrapper {
           position: relative;
           display: inline-block;
-          padding-top: 0.1em;
-          padding-right: 0.05em;
-          padding-bottom: 0.15em;
+          padding: 0.1em 0.05em 0.15em;
         }
 
         .ml1 .line {
@@ -96,12 +108,24 @@ const LoadingScreen: React.FC = () => {
           bottom: 0;
         }
 
-        /* Ensure that the animation won't display until it's triggered */
         .ml1.invisible {
           visibility: hidden;
         }
         .ml1.visible {
           visibility: visible;
+        }
+
+        .image-slot {
+          height: 120px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .profile-image {
+          max-height: 100%;
+          max-width: 120px;
+          object-fit: contain;
         }
       `}</style>
     </div>

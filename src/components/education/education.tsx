@@ -7,27 +7,30 @@ import { SectionHeading } from "~/components/ui/section-heading";
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
 const events = [
-  "Soft. Dev Inern @ Samsung Cheil",
-  "DS Intern @ CMU/RIT Primate Portal Lab",
-  "Go Club Leader @ Loomis",
-
-  "Student @ AwesomeMath Program",
-  "Research @ Cambridge Centre for International Research",
+  "Software Developer @ Full Stack at Brown",
+  "USACO Gold/Platium Tutor @ Pro HR Korea",
   "STEM Scholarship @ CCIR",
-  "Research @ UCSC",
-  "Student @ IMPSC",
-  "Fellow @ Non-Trivial",
+  "AI Research Intern @ UCSC",
+  "Quantum Computing Research @ Cambridge Centre for International Research",
 
+  "Soft. Eng Inern @ Samsung Cheil",
+  "DS Intern @ CMU/RIT Primate Portal Lab",
+  "Student @ International Math and Physics Summer Camp",
+  "Fellow @ Non-Trivial",
+  "Teaching Assistant for College Level Physics @ Loomis",
+
+  "Go Club Leader @ Loomis",
+  "Quantum Computing Research @ Cambridge Centre for International Research",
+  "STEM Scholarship @ CCIR",
+  "Student @ AwesomeMath Program",
+  "Head Quantitative/Scientific Center Tutor @ Loomis",
   "Software Developer @ Loomis",
   "Web Dir. of The Log @ Loomis",
   "Web Dir. of The Hourglass @ Loomis",
   "Web Dir. of STEM Mag. @ Loomis",
   "Advisor to faculty AI Committee @ Loomis",
   "Advisor to the HoS @ Loomis",
-  "Software Developer @ Loomis",
   "Advisor to Financial Literacy @ Loomis",
-  "TA for CL Physics @ Loomis",
-  "Head QSRC Tutor @ Loomis",
   "Volunteer ISA @ Loomis",
   "Tour Guide @ Loomis",
 ];
@@ -166,19 +169,22 @@ const TimelineAnimation = () => {
               d="M 10 1000 600 1000"
             />
             <text className="year-text fill-white text-[15px]" x="30" y="190">
-              2021
+              2026
             </text>
             <text className="year-text fill-white text-[15px]" x="30" y="390">
-              2022
+              2025
             </text>
             <text className="year-text fill-white text-[15px]" x="30" y="590">
-              2023
-            </text>
-            <text className="year-text fill-white text-[15px]" x="30" y="790">
               2024
             </text>
+            <text className="year-text fill-white text-[15px]" x="30" y="790">
+              2023
+            </text>
             <text className="year-text fill-white text-[15px]" x="30" y="990">
-              2025
+              2022
+            </text>
+            <text className="year-text fill-white text-[15px]" x="30" y="990">
+              2021
             </text>
             <path
               ref={lineRef}
