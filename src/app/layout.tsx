@@ -3,7 +3,6 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import { Toaster } from "~/components/ui/toaster";
-import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 import Script from "next/script";
 
 export const metadata: Metadata = {
@@ -31,8 +30,7 @@ export default function RootLayout({
         </Script>
         <Toaster />
       </body>
-      <GoogleTagManager gtmId="GTM-KJ54BG8S" />
-      <GoogleAnalytics gaId="G-DDZ2W9JMSE" />
+
     </html>
   );
 }

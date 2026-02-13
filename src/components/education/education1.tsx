@@ -108,7 +108,10 @@ const TimelineAnimation = () => {
     <div className="min-h-[400vh] w-full bg-[#141414] font-sans text-white">
       <SectionHeading title={"Education"} />
 
-      <div className="grid grid-cols-[60%_40%]">
+      <div className="grid grid-cols-[10% 50%_40%]">
+        <div className="w-100 h-100 bg-[#141414]">
+
+        </div>
         <div>
           <svg
             id="svg-stage"

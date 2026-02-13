@@ -160,7 +160,7 @@ export default function Research() {
       className="relative min-h-screen w-full bg-[#141414]"
       style={{ color: "black" }}
     >
-      <div className="container h-48 pt-40">
+      <div className="container h-38 pt-10">
         <SectionHeading
           title="Research"
           subTitle="        Hold and slide left/right to see next

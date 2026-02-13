@@ -3,7 +3,7 @@ import type { TimelineEntry } from "../ui/timeline";
 import { FaLink } from "react-icons/fa";
 
 export const sectionHeading = {
-  title: "Non-research Projects",
+  title: "Software Engineering Projects",
   subTitle: "",
 };
 
@@ -20,13 +20,13 @@ export const timelineData: TimelineEntry[] = [
     imageUrl: "/images/pokemon.png",
     description: `Please check this out! It's an online game where users can control my Dog (Pommy) in a pokemon world. By following the instructions, the user can access the basics of my portfolio within the game. (Currently, it takes some time to load on certain devices).`,
     tech: [
-      "React",
-      "TypeScript",
+      "Linear Algebra",
+      "WebGL",
+      "Framer Motion",
+
       "Three.js",
       "TailwindCSS",
-      "Blender",
-      "Framer Motion",
-    ],
+      "Blender"    ],
     cards: {
       a: {
         title: "Instructions",
@@ -50,8 +50,11 @@ export const timelineData: TimelineEntry[] = [
     imageUrl: "/images/dormproject.png",
     description: `A software for the Deans' Office at the Loomis Chaffee School that automates their process of assigning students to dorms based on student survey.`,
     tech: [
+      "Binary Linear Programming",
+      "Genetic Algorithm",
       "Python",
       "Pulp (linear programming)",
+      "Electron",
       "Flask",
       "JavaScript",
       "React",
@@ -71,22 +74,18 @@ export const timelineData: TimelineEntry[] = [
   },
   {
     title: "Chemistry Molecule Viewer",
-    projectUrls: {
-      site: {
-        url: "https://dmol-b8de0.web.app/Home",
-        icon: <RiExternalLinkLine size={20} />,
-      },
-    },
     imageUrl: "/images/chemistry.png",
     description: `A software for the Loomis Chaffee School's Chemistry Department that provides interactive figures of molecules.`,
     tech: [
+      "AWS",
+      "Firebase",
+      "Angular",
       "Python",
       "Linear Algebra",
       "PubChem API",
       "Flask",
       "JavaScript",
       "TypeScript",
-      "CSS",
       "React",
     ],
     cards: {
@@ -116,7 +115,7 @@ export const timelineData: TimelineEntry[] = [
     },
     imageUrl: "/images/pelicoin.png",
     description: `An all-in-one management platform for the Finanial Literacy Program at the Loomis Chaffee School.`,
-    tech: ["Firebase", "Excel", "React", "JavaScript", "Material UI", "CSS"],
+    tech: ["Supabase", "Microsoft API", "Firebase", "Excel", "React", "JavaScript", "Material UI", "CSS"],
     cards: {
       a: {
         title: "Client Request",
@@ -139,7 +138,7 @@ export const timelineData: TimelineEntry[] = [
     },
     imageUrl: "/images/workjob.png",
     description: `An automatic assignment platform that assigns students to mandatory campus workjobs.`,
-    tech: ["React", "TypeScript", "Mantine UI"],
+    tech: ["Python", "React", "TypeScript", "Mantine UI"],
     cards: {
       a: {
         title: "Client Request",
