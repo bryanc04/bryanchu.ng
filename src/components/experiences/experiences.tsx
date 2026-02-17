@@ -4,7 +4,7 @@ import "./styles.css";
 import { motion, Variants } from "framer-motion";
 import { SectionHeading } from "~/components/ui/section-heading";
 
-import loomisLogo from "public/images/loomis.png";
+import loomisLogo from "/public/images/loomis.png";
 import rumseyLogo from "public/images/rumsey.png";
 import asmp from "public/images/asmp.png";
 import stanford from "public/images/stanford.png";

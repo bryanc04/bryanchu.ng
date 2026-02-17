@@ -17,10 +17,5 @@ const config = {
   },
 };
 
-module.exports = {
-  typescript: {
-    ignoreBuildErrors: true
-  }
-};
 
 export default config;
