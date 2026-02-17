@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import anime from "animejs";
 
 const LoadingScreen: React.FC = () => {
-  const [letters] = useState("BRYAN".split(""));
+  const [letters] = useState("WELCOME!".split(""));
   const [animationStarted, setAnimationStarted] = useState(false);
 
   useEffect(() => {
@@ -13,23 +13,23 @@ const LoadingScreen: React.FC = () => {
         scale: [0.7, 1],
         opacity: [0, 1],
         easing: "easeOutQuad",
-        duration: 120,
-        delay: (el, i) => 12 * i,
+        duration: 250,
+        delay: (el, i) => 25 * i,
       })
       .add({
         targets: ".ml1 .line",
         scaleX: [0, 1],
         opacity: [0.5, 1],
         easing: "easeOutQuad",
-        duration: 100,
+        duration: 200,
         offset: "-=90",
       })
       .add({
         targets: ".ml1",
         opacity: 0,
-        duration: 120,
+        duration: 250,
         easing: "easeInQuad",
-        delay: 100,
+        delay: 200,
       });
 
     setAnimationStarted(true);
@@ -56,19 +56,7 @@ const LoadingScreen: React.FC = () => {
           </div>
         </div>
 
-        <div className="image-slot">
-          <img
-            src="/images/brown_logo.png"
-            alt="profile"
-            className="profile-image"
-            style={{
-              maxWidth: "120px",
-              maxHeight: "120px",
-              objectFit: "contain",
-              display: "block",
-            }}
-          />
-        </div>
+
       </div>
 
       <style jsx>{`
