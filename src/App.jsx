@@ -601,6 +601,8 @@ function LsPage({ onNavigate }) {
           ["honors", "USACO, PhysicsBowl, AMC, ARML, Cambridge"],
           ["contact", "interactive bash shell"],
           ["ls / help", "this screen"],
+          ["theme", "cycle interface theme"],
+          ["clear", "reset terminal output"],
         ].map(([k, v]) => (
           <KVRow key={k} k={k} v={v} />
         ))}
@@ -1107,7 +1109,7 @@ export default function App() {
             cards={honorsData.cards}
           />
         )}
-        {view === "ls" && <LsPage onNavigate={navigate} />}
+        {(view === "ls" || view === "help") && <LsPage onNavigate={navigate} />}
       </div>
     );
   };
