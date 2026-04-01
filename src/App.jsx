@@ -119,12 +119,13 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:899;
 
 /* ── INPUT BAR ── */
 .ibar{flex-shrink:0;display:flex;align-items:center;background:var(--bg1);
-  border-top:2px solid var(--border);position:relative;transition:border-color var(--trans);}
-.ibar.focused{border-top-color:var(--p);}
+  border:1px solid var(--border);position:relative;transition:border-color var(--trans);
+  margin:0 12px 12px 12px;border-radius:2px;}
+.ibar.focused{border-color:var(--p);}
 .ibar-label{padding:7px 10px 7px 12px;color:var(--p);font-size:11.5px;font-weight:700;
   letter-spacing:.05em;user-select:none;background:var(--bg2);border-right:1px solid var(--border);white-space:nowrap;}
 .inp{flex:1;background:transparent;border:none;outline:none;color:var(--txt-main);
-  font-family:inherit;font-size:12.5px;caret-color:var(--p);padding:7px 10px;}
+  font-family:inherit;font-size:12.5px;caret-color:transparent;padding:7px 10px;}
 .inp::placeholder{color:var(--dim);}
 .inp-hint{padding:0 12px;font-size:10px;color:var(--dim);white-space:nowrap;user-select:none;}
 
@@ -139,6 +140,14 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:899;
 .ac-desc{color:var(--muted);font-size:10px;}
 .ac-cat{padding:3px 14px;font-size:9px;color:var(--dim);letter-spacing:.12em;
   background:var(--bg2);border-bottom:1px solid var(--bg3);}
+
+@keyframes border-blink {
+  0%, 100% { border-color: var(--p); }
+  50% { border-color: var(--border); }
+}
+.ibar.focused {
+  animation: border-blink 1.1s step-end infinite;
+}
 
 /* quick nav */
 .qnav{flex-shrink:0;display:flex;gap:3px;padding:5px 12px;
@@ -235,7 +244,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:899;
 .metrics2col{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px;}
 
 @keyframes bl{0%,100%{opacity:1}50%{opacity:0}}
-.bl{animation:bl 1s step-end infinite;}
+.bl{animation:bl 1.1s step-end infinite;}
 @keyframes card-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .card{animation:card-in .3s ease both;}
 @keyframes bar-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -1117,9 +1126,9 @@ export default function App() {
     <>
       <style>{CSS}</style>
       <PixelTrail
-        gridSize={80}
+        gridSize={40}
         trailSize={0.02}
-        maxAge={300}
+        maxAge={500}
         interpolate={5}
         color={accentHex}
       />
@@ -1290,39 +1299,68 @@ export default function App() {
                     })()}
                   </div>
                 )}
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <input
-                    ref={inpRef}
-                    className="inp"
-                    type="text"
-                    autoComplete="off"
-                    spellCheck={false}
-                    value={inputVal}
-                    placeholder="type: help, about, projects, skills…"
-                    onChange={(e) => {
-                      setInputVal(e.target.value);
-                      setAcVisible(!!e.target.value);
-                      setAcIdx(-1);
+                  <div
+                    style={{
+                      position: "relative",
+                      flex: 1,
+                      display: "flex",
+                      alignItems: "center",
+                      overflow: "hidden",
                     }}
-                    onKeyDown={handleKeyDown}
-                    onFocus={() => setIbarFocused(true)}
-                    onBlur={() => setIbarFocused(false)}
-                  />
-                  {!inputVal && (
-                    <span
-                      className="bl"
+                  >
+                    <input
+                      ref={inpRef}
+                      className="inp"
+                      type="text"
+                      autoComplete="off"
+                      spellCheck={false}
+                      value={inputVal}
+                      placeholder="type: help, about, projects, skills…"
+                      onChange={(e) => {
+                        setInputVal(e.target.value);
+                        setAcVisible(!!e.target.value);
+                        setAcIdx(-1);
+                      }}
+                      onKeyDown={handleKeyDown}
+                      onFocus={() => {
+                        setIbarFocused(true);
+                        setAcVisible(!!inputVal);
+                      }}
+                      onBlur={() => setIbarFocused(false)}
                       style={{
-                        color: "var(--p)",
-                        marginLeft: -2,
+                        position: "absolute",
+                        inset: 0,
+                        zIndex: 2,
+                      }}
+                    />
+                    {/* Mirror span for cursor positioning */}
+                    <div
+                      style={{
+                        padding: "7px 10px",
+                        fontSize: "12.5px",
+                        color: "transparent",
+                        whiteSpace: "pre",
                         pointerEvents: "none",
-                        fontSize: 14,
-                        lineHeight: 1,
+                        display: "flex",
+                        alignItems: "center",
                       }}
                     >
-                      ▋
-                    </span>
-                  )}
-                </div>
+                      {inputVal}
+                      {ibarFocused && (
+                        <span
+                          className="bl"
+                          style={{
+                            color: "var(--p)",
+                            marginLeft: 1,
+                            pointerEvents: "none",
+                            fontWeight: 300,
+                          }}
+                        >
+                          |
+                        </span>
+                      )}
+                    </div>
+                  </div>
               </div>
               <span className="inp-hint">TAB to complete</span>
             </div>
@@ -1445,20 +1483,30 @@ export default function App() {
    CUSTOM CURSOR
 ════════════════════════════════════ */
 function CustomCursor() {
-  const [pos, setPos] = useState({ x: -100, y: -100 });
+  const curRef = useRef(null);
+
   useEffect(() => {
-    const h = (e) => setPos({ x: e.clientX, y: e.clientY });
-    document.addEventListener("mousemove", h);
-    return () => document.removeEventListener("mousemove", h);
+    const el = curRef.current;
+    if (!el) return;
+
+    const h = (e) => {
+      // Direct DOM update is much faster than React state for 60fps cursor
+      el.style.transform = `translate3d(${e.clientX - 1}px, ${e.clientY - 13}px, 0)`;
+    };
+    window.addEventListener("pointermove", h, { passive: true });
+    return () => window.removeEventListener("pointermove", h);
   }, []);
+
   return (
     <div
+      ref={curRef}
       style={{
         position: "fixed",
         pointerEvents: "none",
         zIndex: 9999,
-        left: pos.x - 1,
-        top: pos.y - 13,
+        top: 0,
+        left: 0,
+        willChange: "transform",
         color: "var(--p)",
         fontSize: 14,
         textShadow: "0 0 8px var(--p), 0 0 20px var(--p)",
