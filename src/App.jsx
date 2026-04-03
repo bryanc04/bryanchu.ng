@@ -557,7 +557,9 @@ function HomePage() {
                   ? "var(--pur)"
                   : h.color === "orange"
                     ? "var(--ora)"
-                    : "var(--muted)";
+                    : h.color === "blue"
+                      ? "cyan"
+                      : "var(--muted)";
           return (
             <div key={i}>
               <div className="kv-row">
@@ -575,12 +577,7 @@ function HomePage() {
       </div>
 
       <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 10 }}>
-        navigate with buttons above · type a command below · click call stack
-        frames to jump back{" "}
-      </div>
-
-      <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 10 }}>
-        top 3 readings of the week:{" "}
+        readings of the week:{" "}
         <a
           href="https://arxiv.org/pdf/2603.28627v1"
           target="_blank"
@@ -607,6 +604,21 @@ function HomePage() {
         >
           deterministic path finding (4/5)
         </a>
+      </div>
+      <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 10 }}>
+        currently exploring:{" "}
+        <a
+          href="https://github.com/kubernetes/perf-tests"
+          target="_blank"
+          className="underline"
+          style={{ color: "blue" }}
+        >
+          kubernetes performance testing
+        </a>
+      </div>
+      <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 10 }}>
+        navigate with buttons above · type a command below · click call stack
+        frames to jump back{" "}
       </div>
     </>
   );
