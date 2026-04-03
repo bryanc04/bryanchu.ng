@@ -11,7 +11,12 @@ export const homeData = {
     { key: "usaco", value: "Platinum", note: "Division", color: "silver" },
     { key: "physics", value: "18th Intl", note: "2nd US-NE", color: "yellow" },
     { key: "math", value: "1st AMC-12", note: "CT Team", color: "yellow" },
-    { key: "program", value: "Discover Citadel", color: "na" },
+    {
+      key: "honors",
+      value: "Non-Trivial",
+      note: "$1.5k Prize",
+      color: "green",
+    },
     {
       key: "scholarship",
       value: "Cambridge",
