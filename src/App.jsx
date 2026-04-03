@@ -14,7 +14,7 @@ import {
   allCommands,
   themes,
 } from "./data/nav";
-import PixelTrail from './components/PixelTrail/PixelTrail';
+import PixelTrail from "./components/PixelTrail/PixelTrail";
 
 /* ── CSS injected once ── */
 const CSS = `
@@ -453,14 +453,33 @@ function HomePage() {
   const d = homeData;
   return (
     <>
-      <div style={{ display: 'flex', gap: '40px', justifyContent: 'center', alignItems: 'center', minHeight: '300px' }}>
-        <pre className="ascii-name" style={{ flexShrink: 0, margin: 0 }}>{`  ██████╗ ██████╗ ██╗   ██╗ █████╗ ███╗   ██╗
+      <div
+        style={{
+          display: "flex",
+          gap: "40px",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "300px",
+        }}
+      >
+        <pre
+          className="ascii-name"
+          style={{ flexShrink: 0, margin: 0 }}
+        >{`  ██████╗ ██████╗ ██╗   ██╗ █████╗ ███╗   ██╗
   ██╔══██╗██╔══██╗╚██╗ ██╔╝██╔══██╗████╗  ██║
   ██████╔╝██████╔╝ ╚████╔╝ ███████║██╔██╗ ██║
   ██╔══██╗██╔══██╗  ╚██╔╝  ██╔══██║██║╚██╗██║
   ██████╔╝██║  ██║   ██║   ██║  ██║██║ ╚████║
   ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝`}</pre>
-        <pre className="ascii-name" style={{ fontSize: '3px', lineHeight: 1.0, color: 'var(--muted)', margin: 0 }}>{`                                        ::..::::-===--:--=-:                                          
+        <pre
+          className="ascii-name"
+          style={{
+            fontSize: "3px",
+            lineHeight: 1.0,
+            color: "var(--muted)",
+            margin: 0,
+          }}
+        >{`                                        ::..::::-===--:--=-:                                          
                                    :-*%%@@@@@@@%%@%@@@%@%%%%%*=:                                      
                                  -+%@%@%@@@@@@@@@%%%%@@@@@@%%%%%%#+-:                                  
                             :.:*%@@@@@%@@@@@@@@@%@@@@@@@@@@@@@@%%%%%#*-                                
@@ -559,10 +578,39 @@ function HomePage() {
         navigate with buttons above · type a command below · click call stack
         frames to jump back{" "}
       </div>
+
+      <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 10 }}>
+        top 3 readings of the week:{" "}
+        <a
+          href="https://arxiv.org/pdf/2603.28627v1"
+          target="_blank"
+          className="underline"
+          style={{ color: "blue" }}
+        >
+          shor's algorithm optimization (5/5)
+        </a>
+        ,{" "}
+        <a
+          href="https://faculty.cc.gatech.edu/~ladha/toc/L16.pdf"
+          target="_blank"
+          className="underline"
+          style={{ color: "blue" }}
+        >
+          rice's theorem (5/5)
+        </a>
+        ,{" "}
+        <a
+          href="https://arxiv.org/pdf/2511.02214"
+          target="_blank"
+          className="underline"
+          style={{ color: "blue" }}
+        >
+          deterministic path finding (4/5)
+        </a>
+      </div>
     </>
   );
 }
-
 
 function GenericCardPage({ title, subtitle, cards }) {
   return (
@@ -607,7 +655,6 @@ function LsPage({ onNavigate }) {
           <KVRow key={k} k={k} v={v} />
         ))}
       </div>
-   
     </div>
   );
 }
@@ -715,7 +762,6 @@ function ContactPage({ pid, startTime, fakeMem, fakeCpu }) {
 /* ════════════════════════════════════
    PARTICLES (canvas)
 ════════════════════════════════════ */
-
 
 /* ════════════════════════════════════
    HEX DUMP
@@ -1301,68 +1347,68 @@ export default function App() {
                     })()}
                   </div>
                 )}
+                <div
+                  style={{
+                    position: "relative",
+                    flex: 1,
+                    display: "flex",
+                    alignItems: "center",
+                    overflow: "hidden",
+                  }}
+                >
+                  <input
+                    ref={inpRef}
+                    className="inp"
+                    type="text"
+                    autoComplete="off"
+                    spellCheck={false}
+                    value={inputVal}
+                    placeholder="type: help, about, projects, skills…"
+                    onChange={(e) => {
+                      setInputVal(e.target.value);
+                      setAcVisible(!!e.target.value);
+                      setAcIdx(-1);
+                    }}
+                    onKeyDown={handleKeyDown}
+                    onFocus={() => {
+                      setIbarFocused(true);
+                      setAcVisible(!!inputVal);
+                    }}
+                    onBlur={() => setIbarFocused(false)}
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      zIndex: 2,
+                    }}
+                  />
+                  {/* Mirror span for cursor positioning */}
                   <div
                     style={{
-                      position: "relative",
-                      flex: 1,
+                      padding: "7px 10px",
+                      fontSize: "12.5px",
+                      color: "transparent",
+                      whiteSpace: "pre",
+                      pointerEvents: "none",
                       display: "flex",
                       alignItems: "center",
-                      overflow: "hidden",
                     }}
                   >
-                    <input
-                      ref={inpRef}
-                      className="inp"
-                      type="text"
-                      autoComplete="off"
-                      spellCheck={false}
-                      value={inputVal}
-                      placeholder="type: help, about, projects, skills…"
-                      onChange={(e) => {
-                        setInputVal(e.target.value);
-                        setAcVisible(!!e.target.value);
-                        setAcIdx(-1);
-                      }}
-                      onKeyDown={handleKeyDown}
-                      onFocus={() => {
-                        setIbarFocused(true);
-                        setAcVisible(!!inputVal);
-                      }}
-                      onBlur={() => setIbarFocused(false)}
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        zIndex: 2,
-                      }}
-                    />
-                    {/* Mirror span for cursor positioning */}
-                    <div
-                      style={{
-                        padding: "7px 10px",
-                        fontSize: "12.5px",
-                        color: "transparent",
-                        whiteSpace: "pre",
-                        pointerEvents: "none",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      {inputVal}
-                      {ibarFocused && (
-                        <span
-                          className="bl"
-                          style={{
-                            color: "var(--p)",
-                            marginLeft: 1,
-                            pointerEvents: "none",
-                            fontWeight: 300,
-                          }}
-                        >
-                          |
-                        </span>
-                      )}
-                    </div>
+                    {inputVal}
+                    {ibarFocused && (
+                      <span
+                        className="bl"
+                        style={{
+                          color: "var(--p)",
+                          marginLeft: 1,
+                          pointerEvents: "none",
+                          fontWeight: 300,
+                        }}
+                      >
+                        |
+                      </span>
+                    )}
                   </div>
+                </div>
               </div>
               <span className="inp-hint">TAB to complete</span>
             </div>
