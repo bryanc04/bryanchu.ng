@@ -263,8 +263,22 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:899;
 .wipe.go{animation:wipe-anim 0.35s ease-in-out forwards;}
 
 @media(max-width:900px){
-  .side,.panel{display:none;}
-  .shell{grid-template-columns:1fr;grid-template-areas:"topbar""main""stat";}
+  .side,.panel,.ibar,.stat{display:none !important;}
+  .shell{
+    grid-template-columns:1fr;
+    grid-template-rows:32px 1fr;
+    grid-template-areas:"topbar" "main";
+  }
+  .addrbar { padding: 4px 10px; }
+  .addr-pc, .addr-mode { display: none; }
+  .tb-pill:not(.lit), .tb-clock, .theme-btn { display: none; }
+  .tb-brand { margin-left: 10px; font-size: 9px; }
+  .disp { padding: 10px 12px; }
+  .hp-ascii-wrap { flex-direction: column !important; gap: 20px !important; min-height: auto !important; padding: 20px 0; }
+  .ascii-name { font-size: 5.5px !important; line-height: 1.1 !important; }
+  .ascii-face { font-size: 2px !important; }
+  .bbox-2col { grid-template-columns: 1fr !important; }
+  .custom-cursor { display: none; }
 }
 `;
 
@@ -453,15 +467,15 @@ function HomePage() {
   const d = homeData;
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          gap: "40px",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "300px",
-        }}
-      >
+    <div className="hp-ascii-wrap"
+      style={{
+        display: "flex",
+        gap: "40px",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "300px",
+      }}
+    >
         <pre
           className="ascii-name"
           style={{ flexShrink: 0, margin: 0 }}
@@ -472,7 +486,7 @@ function HomePage() {
   ██████╔╝██║  ██║   ██║   ██║  ██║██║ ╚████║
   ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═══╝`}</pre>
         <pre
-          className="ascii-name"
+          className="ascii-name ascii-face"
           style={{
             fontSize: "3px",
             lineHeight: 1.0,
@@ -540,7 +554,7 @@ function HomePage() {
       </div>
 
       <div
-        className="bbox"
+        className="bbox bbox-2col"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
@@ -823,6 +837,16 @@ export default function App() {
   const [signals, setSignals] = useState([]);
   const [hitCounts, setHitCounts] = useState({});
   const [themeIdx, setThemeIdx] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 900);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const currentTheme = themes[themeIdx];
   const [wipe, setWipe] = useState(false);
   const [ibarFocused, setIbarFocused] = useState(false);
   const [inputVal, setInputVal] = useState("");
@@ -852,7 +876,7 @@ export default function App() {
   const [bootLines, setBootLines] = useState([]);
   const contactModeRef = useRef(false);
 
-  const currentTheme = themes[themeIdx];
+
 
   // Apply theme CSS vars
   useEffect(() => {
@@ -1185,16 +1209,18 @@ export default function App() {
   return (
     <>
       <style>{CSS}</style>
-      <PixelTrail
-        gridSize={40}
-        trailSize={0.02}
-        maxAge={500}
-        interpolate={5}
-        color={accentHex}
-      />
+      {!isMobile && (
+        <PixelTrail
+          gridSize={40}
+          trailSize={0.02}
+          maxAge={500}
+          interpolate={5}
+          color={accentHex}
+        />
+      )}
       <div className={`wipe${wipe ? " go" : ""}`} />
       {/* Cursor */}
-      <CustomCursor />
+      {!isMobile && <CustomCursor />}
       <div className="shell">
         {/* TOP BAR */}
         <div className="topbar">
@@ -1560,6 +1586,7 @@ function CustomCursor() {
   return (
     <div
       ref={curRef}
+      className="custom-cursor"
       style={{
         position: "fixed",
         pointerEvents: "none",
