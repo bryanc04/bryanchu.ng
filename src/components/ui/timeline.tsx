@@ -1,12 +1,10 @@
 "use client";
-import { useScroll, useTransform, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { sectionHeading } from "../projects/data";
 import { SectionHeading } from "./section-heading";
 import { TimelineHeading } from "./timeline-heading";
-interface ProjectsProps {
-  func: React.Dispatch<React.SetStateAction<boolean>>;
-}
+
 type ProjectUrls = {
   site?: {
     url: any;
@@ -41,26 +39,26 @@ interface TimelineProps {
 
 export const Timeline: React.FC<TimelineProps> = ({ data, func }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    if (ref.current) {
-      const rect = ref.current.getBoundingClientRect();
+    const element = ref.current;
+    if (!element) return;
+
+    const updateHeight = () => {
+      const rect = element.getBoundingClientRect();
       setHeight(rect.height);
-    }
-  }, [ref]);
+    };
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 10%", "end 50%"],
-  });
+    updateHeight();
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(element);
 
-  const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
-  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="w-full font-sans" ref={containerRef}>
+    <div className="relative w-full font-sans">
       <SectionHeading
         title={sectionHeading.title}
         subTitle={sectionHeading.subTitle}
@@ -76,11 +74,12 @@ export const Timeline: React.FC<TimelineProps> = ({ data, func }) => {
           className="absolute left-8 top-0 w-[2px] overflow-hidden bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] dark:via-neutral-700 md:left-8"
         >
           <motion.div
-            style={{
-              height: heightTransform,
-              opacity: opacityTransform,
-            }}
-            className="absolute inset-x-0 top-0 w-[2px] rounded-full bg-gradient-to-t from-purple-500 from-[0%] via-blue-500 via-[10%] to-transparent"
+            initial={{ opacity: 0, scaleY: 0 }}
+            whileInView={{ opacity: 1, scaleY: 1 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
+            style={{ transformOrigin: "top" }}
+            className="absolute inset-x-0 top-0 h-full w-[2px] rounded-full bg-gradient-to-t from-amber-300 from-[0%] via-teal-400 via-[45%] to-transparent"
           />
         </div>
       </div>

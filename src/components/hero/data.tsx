@@ -1,45 +1,44 @@
 import { FaLinkedinIn } from "react-icons/fa";
 import { IoLogoGithub } from "react-icons/io";
-import { IoMusicalNotesSharp } from "react-icons/io5";
 
 export const title = {
   plainText: "Bryan Chung",
   glowText: "Bryan Chung",
   subTitle: [
-    "Freshman at Brown University",
-    "Alumnus of Loomis Chaffee School",
-    "AI Researcher",
-    "Go Player",
-    "Dog Owner",
-    "Kendrick Lamar Fan",
+    "Founder & CTO at Insurf (YC S26)",
+    "Brown Applied Mathematics-CS + Physics",
+    "AI systems, econometrics, and decision science",
+    "Builder of reliable, data-intensive products",
   ],
   highlight: [
     "Brown",
-    "Loomis",
-    "Chaffee",
-    "School",
-    "Soccer",
+    "Applied",
+    "Mathematics-CS",
+    "Physics",
     "AI",
-    "Researcher",
-    "Go",
-    "Dog",
-    "Kendrick",
-    "Lamar",
+    "Insurf",
+    "YC",
+    "S26",
+    "systems",
+    "econometrics",
+    "decision",
   ],
 };
 
 export const profileCard = {
   title: "Bryan Chung",
-  subTitle: "Freshman at Brown University",
-  body: `Student passionate in software engineering, artificial intelligence, quantum informatics, physics, math, and teaching. Always looking for ways to deliver impact through computer science. Also a researcher, teaching assistant, athlete, dog-lover, and avid Kendrick Lamar fan.`,
+  subTitle: "Brown Sc.B. candidate, GPA 4.0",
+  body: `Founder & CTO of Insurf, building decision intelligence for health insurance with graph transformers, uncertainty-aware ranking, and fail-closed federal data ingestion. I also research belief formation and market diffusion at Brown, with a toolkit spanning Python, TypeScript, C++, SQL, Go, PyTorch, PostgreSQL, Kafka, Redis, Docker, and AWS.`,
   socialUrls: [
+    {
+      url: "https://www.linkedin.com/in/bryan-chung-21b531265",
+      icon: <FaLinkedinIn size={20} />,
+      label: "LinkedIn",
+    },
     {
       url: "https://github.com/bryanc04",
       icon: <IoLogoGithub size={20} />,
-    },
-    {
-      url: "https://music.apple.com/us/playlist/music/pl.u-e98lkXqHzgzkWA1",
-      icon: <IoMusicalNotesSharp size={20} />,
+      label: "GitHub",
     },
   ],
   tooltip: {

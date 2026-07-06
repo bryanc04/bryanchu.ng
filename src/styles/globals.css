@@ -71,6 +71,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
   .gradient-text {
     @apply bg-gradient-to-t from-neutral-400 to-neutral-50 bg-clip-text text-transparent;

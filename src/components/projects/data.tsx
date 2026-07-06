@@ -1,13 +1,57 @@
 import { RiExternalLinkLine } from "react-icons/ri";
 import type { TimelineEntry } from "../ui/timeline";
-import { FaLink } from "react-icons/fa";
 
 export const sectionHeading = {
-  title: "Software Engineering Projects",
-  subTitle: "",
+  title: "Selected Projects",
+  subTitle: "Systems that blend algorithms, product, and data",
 };
 
 export const timelineData: TimelineEntry[] = [
+  {
+    title: "Insurf Decision Graph",
+    description: `Decision intelligence for health insurance plan selection, built around a relational graph transformer, uncertainty-aware ranking, and statutory cost simulation.`,
+    tech: [
+      "Graph Transformers",
+      "Conformal Prediction",
+      "Counterfactual Inference",
+      "Python",
+      "TypeScript",
+      "PostgreSQL",
+    ],
+    cards: {
+      a: {
+        title: "Modeling",
+        text: `Built CDGT over Insurf's decision graph with relation-aware attention, nearest-precedent retrieval, counterfactual treatment-effect estimation, and provenance-weighted conformal intervals.`,
+      },
+      b: {
+        title: "Reliability",
+        text: `Verified runs against a seeded stochastic sandbox and engineered fail-closed federal plan ingestion so sparse or incomplete filings propagate uncertainty instead of corrupting cost estimates.`,
+      },
+    },
+  },
+  {
+    title: "Biophysical Alpha Signals",
+    imageUrl: "/images/nextMotion.png",
+    description: `A sports-market research system that extracts player movement signals from broadcast video and tests whether fatigue proxies can identify pricing dislocations.`,
+    tech: [
+      "MediaPipe Pose",
+      "Kalman Smoothing",
+      "PyTorch",
+      "LSTM",
+      "Market Simulation",
+      "Python",
+    ],
+    cards: {
+      a: {
+        title: "Signal Pipeline",
+        text: `Extracted per-player joint velocities from broadcast video and denoised a rolling-variance fatigue proxy with a Kalman/RTS smoother.`,
+      },
+      b: {
+        title: "Modeling",
+        text: `Trained a PyTorch LSTM encoder-decoder on three NBA seasons and sized simulated positions with quarter-Kelly when model and bookmaker-implied probabilities diverged by more than five percentage points.`,
+      },
+    },
+  },
   {
     title: "Custom Pokemon Game Portfolio",
     projectUrls: {
@@ -18,7 +62,7 @@ export const timelineData: TimelineEntry[] = [
       },
     },
     imageUrl: "/images/pokemon.png",
-    description: `Please check this out! It's an online game where users can control my Dog (Pommy) in a pokemon world. By following the instructions, the user can access the basics of my portfolio within the game. (Currently, it takes some time to load on certain devices).`,
+    description: `An interactive 3D portfolio world where visitors can move through a game scene and discover sections of the site through play.`,
     tech: [
       "Linear Algebra",
       "WebGL",
@@ -26,20 +70,21 @@ export const timelineData: TimelineEntry[] = [
 
       "Three.js",
       "TailwindCSS",
-      "Blender"    ],
+      "Blender",
+    ],
     cards: {
       a: {
-        title: "Instructions",
-        text: `Use the w-a-s-d keys to navigate Pommy. To access my portfolio, follow the arrow shown on screen, navigate forward, and press space. There is a soccer ball that Pommy can kick around. You can also hold down your cursor and move it around to change viewing angles.`,
+        title: "Interaction",
+        text: `Built character movement, camera control, scene navigation, and object interactions so the portfolio becomes an explorable environment instead of a static page.`,
       },
       b: {
-        title: "To be updated by 2025",
-        text: `Faster rendering time, clearer graphics, more game-like options (wild pokemons, etc).`,
+        title: "Rendering",
+        text: `Combined Three.js, Blender assets, and Framer Motion to keep the experience playful while preserving responsive page performance.`,
       },
     },
   },
   {
-    title: "Dorm Assignment",
+    title: "Dorm Assignment Optimizer",
     projectUrls: {
       repo: {
         name: "dorm_assignment",
@@ -48,7 +93,7 @@ export const timelineData: TimelineEntry[] = [
       },
     },
     imageUrl: "/images/dormproject.png",
-    description: `A software for the Deans' Office at the Loomis Chaffee School that automates their process of assigning students to dorms based on student survey.`,
+    description: `A room-assignment optimizer for 800-student housing allocation, pairing exact optimization with a faster heuristic workflow for large instances.`,
     tech: [
       "Binary Linear Programming",
       "Genetic Algorithm",
@@ -63,12 +108,12 @@ export const timelineData: TimelineEntry[] = [
     ],
     cards: {
       a: {
-        title: "Client Request",
-        text: `Prior to the completion of this project, the Deans manually assigned 650+ students to dorms for multiple weeks over summer, attempting to satisfy as many of the students' requests as possible.`,
+        title: "Optimization",
+        text: `Formulated room assignment as a binary linear program, linearized co-room preferences with McCormick envelopes, and solved the exact model with PuLP/CBC.`,
       },
       b: {
-        title: "My Work",
-        text: `Developed a program that automatically assignes students, maximizing their satisfaction based on survey data. Also provided them with a friendly user interface to manually tweak the automated output for the very rare exceptions. This program has been in use in the Loomis Chaffee School since 2024. (For privacy reasons, the live version of software is private).`,
+        title: "Workflow",
+        text: `Paired the solver with a parallel genetic algorithm and interface for manual adjustments, replacing a weeks-long assignment process with a repeatable planning tool.`,
       },
     },
   },
@@ -114,8 +159,17 @@ export const timelineData: TimelineEntry[] = [
       },
     },
     imageUrl: "/images/pelicoin.png",
-    description: `An all-in-one management platform for the Finanial Literacy Program at the Loomis Chaffee School.`,
-    tech: ["Supabase", "Microsoft API", "Firebase", "Excel", "React", "JavaScript", "Material UI", "CSS"],
+    description: `An all-in-one management platform for the Financial Literacy Program at the Loomis Chaffee School.`,
+    tech: [
+      "Supabase",
+      "Microsoft API",
+      "Firebase",
+      "Excel",
+      "React",
+      "JavaScript",
+      "Material UI",
+      "CSS",
+    ],
     cards: {
       a: {
         title: "Client Request",
@@ -137,7 +191,7 @@ export const timelineData: TimelineEntry[] = [
       },
     },
     imageUrl: "/images/workjob.png",
-    description: `An automatic assignment platform that assigns students to mandatory campus workjobs.`,
+    description: `An automatic assignment platform that assigns students to mandatory campus jobs.`,
     tech: ["Python", "React", "TypeScript", "Mantine UI"],
     cards: {
       a: {
@@ -146,7 +200,7 @@ export const timelineData: TimelineEntry[] = [
       },
       b: {
         title: "My Work",
-        text: `Developed an automatic algorithm that automatically places all students into workjobs. Also created a software that allows for changes through drag-and-drop.`,
+        text: `Developed an assignment algorithm that places students into campus jobs and a drag-and-drop interface for targeted manual changes.`,
       },
     },
   },
@@ -171,7 +225,7 @@ export const timelineData: TimelineEntry[] = [
     title: "International Student Support Meeting Scheduler",
     projectUrls: {},
     imageUrl: "/images/comingsoon.png",
-    description: `An automatic scheduler for Internaltional Student Ambassadors' mandatory meetings with their Dean, Mrs. Pond.`,
+    description: `An automatic scheduler for International Student Ambassadors' recurring dean meetings.`,
     tech: ["Python", "Qt", "PySide6"],
     cards: {
       a: {

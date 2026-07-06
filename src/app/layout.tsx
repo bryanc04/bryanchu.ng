@@ -6,8 +6,9 @@ import { Toaster } from "~/components/ui/toaster";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "Bryan Chung's Page",
-  description: "Check out Bryan's portfolio!",
+  title: "Bryan Chung",
+  description:
+    "Portfolio of Bryan Chung, Brown Applied Mathematics-CS and Physics student, Founder & CTO of Insurf, and AI systems researcher.",
   icons: [{ url: "/logo.svg", rel: "icon" }],
 };
 
@@ -30,7 +31,6 @@ export default function RootLayout({
         </Script>
         <Toaster />
       </body>
-
     </html>
   );
 }

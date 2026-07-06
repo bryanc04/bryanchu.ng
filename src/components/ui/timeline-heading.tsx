@@ -7,7 +7,6 @@ import type { TimelineEntry } from "./timeline";
 import { useGitHubRepoData } from "~/hooks/useGitHubRepoData";
 import { NumberTicker } from "./number-ticker";
 import { FaStar } from "react-icons/fa";
-import { Dispatch, SetStateAction } from "react";
 
 type TimelineHeadingProps = {
   entry: TimelineEntry;
@@ -59,10 +58,10 @@ export function TimelineHeading({ entry, func }: TimelineHeadingProps) {
                 </LinkPreview>
                 {entry.projectUrls?.repo?.showStarCount && (
                   <motion.div
-                    initial={{ display: "hidden" }}
-                    whileInView={{ display: "flex" }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true, margin: "-60px" }}
-                    className="gap-1"
+                    className="flex gap-1"
                   >
                     <FaStar
                       className="transition-all duration-200 ease-in-out group-hover:rotate-180"
@@ -109,10 +108,10 @@ export function TimelineHeading({ entry, func }: TimelineHeadingProps) {
                 </Link>
                 {entry.projectUrls?.repo?.showStarCount && (
                   <motion.div
-                    initial={{ display: "hidden" }}
-                    whileInView={{ display: "flex" }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     viewport={{ once: true, margin: "-60px" }}
-                    className="gap-1"
+                    className="flex gap-1"
                   >
                     <FaStar color="gold" size={20} />
                     <NumberTicker className="text-sm" value={repo.starCount} />
