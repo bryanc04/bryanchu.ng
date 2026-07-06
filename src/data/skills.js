@@ -3,7 +3,7 @@ export const skillsData = {
     {
       id: "sk-langs",
       title: "Languages",
-      sub: "Python · C++ · JS/TS · SQL · Go · C · Lua",
+      sub: "Python · C++ · TypeScript · SQL · Go",
       tags: [
         { label: "systems", type: "o" },
         { label: "web", type: "t" },
@@ -14,19 +14,15 @@ export const skillsData = {
       bars: [
         { label: "Python",        pct: 95 },
         { label: "C++",           pct: 85 },
-                { label: "C",             pct: 85 },
-
-        { label: "JavaScript/TS", pct: 82 },
-        { label: "SQL",           pct: 82 },
-        { label: "Go",            pct: 72 },
-        { label: "Lua",           pct: 70 },
-        { label: "Ruby on Rails", pct: 65 },
+        { label: "TypeScript",    pct: 86 },
+        { label: "SQL",           pct: 84 },
+        { label: "Go",            pct: 74 },
       ],
     },
     {
       id: "sk-ml",
       title: "ML / Math Stack",
-      sub: "PyTorch · SciPy · Contrastive Learning · Kalman",
+      sub: "PyTorch · NumPy/pandas · graph ML · econometrics",
       tags: [
         { label: "research", type: "g" },
         { label: "IEEE paper", type: "p" },
@@ -35,11 +31,11 @@ export const skillsData = {
       type: "bars",
       bars: [
         { label: "PyTorch",            pct: 92 },
-        { label: "NumPy / SciPy",      pct: 90 },
-        { label: "Contrastive ML",     pct: 85 },
-        { label: "TensorFlow",         pct: 80 },
-        { label: "Kalman Filter",      pct: 80 },
-        { label: "Information Theory", pct: 82 },
+        { label: "NumPy / pandas",     pct: 90 },
+        { label: "Graph Transformers", pct: 84 },
+        { label: "Conformal Prediction", pct: 82 },
+        { label: "Kalman / RTS Smoothing", pct: 80 },
+        { label: "Econometrics",       pct: 78 },
       ],
     },
     {
@@ -48,7 +44,7 @@ export const skillsData = {
       sub: "Kafka · Docker · Redis · AWS · PostgreSQL",
       tags: [
         { label: "production", type: "o" },
-        { label: "internship", type: "" },
+        { label: "data infra", type: "" },
       ],
       defaultOpen: false,
       type: "bars",
@@ -56,9 +52,9 @@ export const skillsData = {
         { label: "Docker",      pct: 88 },
         { label: "Apache Kafka",pct: 82 },
         { label: "Redis",       pct: 80 },
-        { label: "AWS ECS/ECR", pct: 78 },
-        { label: "PostgreSQL",  pct: 80 },
-        { label: "GitLab CI",   pct: 85 },
+        { label: "AWS ECS/Fargate", pct: 78 },
+        { label: "PostgreSQL",  pct: 84 },
+        { label: "GitHub Actions", pct: 82 },
       ],
     },
     {

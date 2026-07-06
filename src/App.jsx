@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { homeData } from "./data/home";
 import { aboutData } from "./data/about";
 import { skillsData } from "./data/skills";
@@ -591,43 +591,43 @@ function HomePage() {
       </div>
 
       <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 10 }}>
-        readings of the week:{" "}
+        active build:{" "}
         <a
-          href="https://arxiv.org/pdf/2603.28627v1"
+          href="https://bryanchu.ng"
           target="_blank"
           className="underline"
           style={{ color: "blue" }}
         >
-          shor's algorithm optimization (5/5)
+          Insurf decision graph
         </a>
         ,{" "}
         <a
-          href="https://faculty.cc.gatech.edu/~ladha/toc/L16.pdf"
+          href="https://ieeexplore.ieee.org/document/10433803"
           target="_blank"
           className="underline"
           style={{ color: "blue" }}
         >
-          rice's theorem (5/5)
+          DataAgent eval
         </a>
         ,{" "}
         <a
-          href="https://arxiv.org/pdf/2511.02214"
+          href="https://ieeexplore.ieee.org/document/10433841"
           target="_blank"
           className="underline"
           style={{ color: "blue" }}
         >
-          deterministic path finding (4/5)
+          contrastive plant disease
         </a>
       </div>
       <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 10 }}>
         currently exploring:{" "}
         <a
-          href="https://github.com/kubernetes/perf-tests"
+          href="https://www.linkedin.com/in/bryan-chung-21b531265"
           target="_blank"
           className="underline"
           style={{ color: "blue" }}
         >
-          kubernetes performance testing
+          belief extraction, market diffusion, and uncertainty-aware ranking
         </a>
       </div>
       <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 10 }}>
@@ -660,7 +660,7 @@ function GenericCardPage({ title, subtitle, cards }) {
   );
 }
 
-function LsPage({ onNavigate }) {
+function LsPage() {
   return (
     <div>
       <div className="st">COMMANDS</div>
@@ -669,10 +669,10 @@ function LsPage({ onNavigate }) {
           ["home", "landing screen"],
           ["about", "background, values, arc"],
           ["skills", "languages, ML, infra, algorithms"],
-          ["experience", "3 internships — UCSC, CMU/RIT, Samsung"],
+          ["experience", "Insurf, Brown, Dawn, CMU/RIT, Samsung"],
           ["projects", "list all projects"],
-          ["research", "IEEE papers + ongoing work"],
-          ["honors", "USACO, PhysicsBowl, AMC, ARML, Cambridge"],
+          ["research", "IEEE papers"],
+          ["honors", "USACO, Discover Citadel, PhysicsBowl, AMC, ARML, CCIR"],
           ["contact", "interactive bash shell"],
           ["ls / help", "this screen"],
           ["theme", "cycle interface theme"],
@@ -685,7 +685,7 @@ function LsPage({ onNavigate }) {
   );
 }
 
-function ContactPage({ pid, startTime, fakeMem, fakeCpu }) {
+function ContactPage({ pid, startTime, fakeCpu }) {
   const outRef = useRef(null);
   const [lines, setLines] = useState([
     `<span style="color:var(--p2)">; ── contact shell ─────────────────────────────────────────────</span>`,
@@ -853,7 +853,7 @@ export default function App() {
   const [acVisible, setAcVisible] = useState(false);
   const [acIdx, setAcIdx] = useState(-1);
   const [hist, setHist] = useState([]);
-  const [hIdx, setHIdx] = useState(-1);
+  const [, setHIdx] = useState(-1);
   const [clock, setClock] = useState("");
   const [uptime, setUptime] = useState("00:00");
   const [fakeCpu, setFakeCpu] = useState(2.0);
@@ -972,10 +972,10 @@ export default function App() {
       `<span style="color:#333">[0.082] .data   0x00601000  rw-  read-write</span>`,
       `<span style="color:#333">[0.121] .rodata 0x004ff000  r--  read-only</span>`,
       `<span style="color:var(--p)">[0.160] OK  Brown University · GPA 4.0 · Applied Math-CS + Physics</span>`,
-      `<span style="color:var(--p)">[0.200] OK  IEEE ICAIC 2024 · first author</span>`,
-      `<span style="color:var(--p)">[0.240] OK  USACO Platinum · PhysicsBowl 18th intl</span>`,
-      `<span style="color:var(--p)">[0.280] OK  3× internships loaded: UCSC · CMU/RIT · Samsung</span>`,
-      `<span style="color:#555">[0.340] --  Kafka consumers healthy · Docker ready</span>`,
+      `<span style="color:var(--p)">[0.200] OK  Insurf · Founder & CTO · YC S26</span>`,
+      `<span style="color:var(--p)">[0.240] OK  IEEE ICAIC 2024 · 2 publications</span>`,
+      `<span style="color:var(--p)">[0.280] OK  USACO 80th intl · PhysicsBowl 18th intl</span>`,
+      `<span style="color:#555">[0.340] --  Kafka · Redis · PostgreSQL · Docker · AWS ready</span>`,
       `<span style="color:var(--p)">[0.400] OK  Breakpoint 1 at home+0x0</span>`,
       "",
       `<span style="color:#d0d0d0;font-weight:700">Breakpoint 1, home () at portfolio.c:1</span>`,
@@ -1065,11 +1065,15 @@ export default function App() {
   );
 
   // Autocomplete
-  const acMatches = inputVal
-    ? allCommands
-        .filter((x) => x.cmd.startsWith(inputVal.toLowerCase()))
-        .slice(0, 12)
-    : [];
+  const acMatches = useMemo(
+    () =>
+      inputVal
+        ? allCommands
+            .filter((x) => x.cmd.startsWith(inputVal.toLowerCase()))
+            .slice(0, 12)
+        : [],
+    [inputVal],
+  );
 
   const handleKeyDown = useCallback(
     (e) => {
@@ -1141,7 +1145,6 @@ export default function App() {
         <ContactPage
           pid={pid.current}
           startTime={startTime.current}
-          fakeMem={fakeMem}
           fakeCpu={fakeCpu}
         />
       );

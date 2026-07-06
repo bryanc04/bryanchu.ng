@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unknown-property */
+/* eslint-disable react-hooks/immutability */
 import { useMemo, useEffect, useRef } from 'react';
 import { Canvas, useThree, useFrame } from '@react-three/fiber';
 import { shaderMaterial, useTrailTexture } from '@react-three/drei';

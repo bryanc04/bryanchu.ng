@@ -1,131 +1,109 @@
 export const projectsData = {
   cards: [
     {
-      id: "pj-arb",
-      title: "Biophysical Performance Arbitrage",
-      sub: "NBA player prop betting model",
+      id: "pj-insurf",
+      title: "Insurf Decision Graph",
+      sub: "Graph-transformer plan ranking + statutory cost engine",
       tags: [
-        { label: "MediaPipe", type: "t" },
-        { label: "Kalman",    type: "p" },
-        { label: "LSTM",      type: "p" },
-        { label: "Kelly",     type: "g" },
-      ],
-      defaultOpen: false,
-      body: [
-        {
-          type: "prose",
-          text: "Bookmakers price props on season averages — they don't model in-game fatigue. A player who has run 2.5 miles in intense defense shoots measurably worse. This pipeline exploits that gap.",
-        },
-        {
-          type: "bullets",
-          items: [
-            "{orange:MediaPipe Pose} — 33 body keypoints per frame, no CV training required",
-            "Motion spread = variance of joint speeds over 2-min sliding window — fatigue signature",
-            "Kalman smoother (pykalman RTS) removes MediaPipe occlusion spikes. .em() fits noise params automatically.",
-            "PyTorch LSTM: 5min motion spread history → predicted accuracy for next 2-min window",
-            "Kelly sizing: edge/odds. Quarter-Kelly in practice. Result: {green:19% expected return} across 3 NBA seasons",
-          ],
-        },
-      ],
-    },
-
-    {
-      id: "pj-dorm",
-      title: "Dorm Assignment Optimizer",
-      sub: "Loomis Chaffee School — 800 students",
-      tags: [
-        { label: "ILP",           type: "p" },
-        { label: "Genetic Algo",  type: "o" },
-        { label: "Lua scripting", type: "t" },
-        { label: "live on campus",type: "g" },
+        { label: "CDGT", type: "p" },
+        { label: "conformal", type: "g" },
+        { label: "IRS/CMS", type: "o" },
+        { label: "PostgreSQL", type: "t" },
       ],
       defaultOpen: true,
       body: [
         {
           type: "prose",
-          text: "Assigning 800 students to 400 rooms. Two engines — {purple:ILP} (provably optimal, slow) and {orange:GA} (near-optimal, fast) — covering each other's blind spots.",
+          text: "Decision intelligence for health insurance plan selection. The engine treats plan choice as a graph problem under uncertainty instead of a flat cost-sort.",
         },
         {
-          type: "prose",
-          muted: true,
-          label: "ILP (Binary LP):",
-          labelColor: "purple",
-          text: "x[s,r] ∈ {0,1} for every (student,room) pair. Quadratic preference terms linearized via McCormick envelopes. Solved by PuLP/CBC with branch-and-bound.",
-        },
-        {
-          type: "prose",
-          muted: true,
-          label: "GA:",
-          labelColor: "orange",
-          text: "Chromosome = array[800] of room IDs. Order Crossover, 2% mutation, elitism. multiprocessing.Pool bypasses GIL for parallel fitness evaluation.",
-        },
-        {
-          type: "prose",
-          muted: true,
-          label: "Lua layer:",
-          labelColor: "teal",
-          text: "Admins modify constraints without redeploying. Lua interpreter embedded in Python/Flask backend.",
-        },
-        {
-          type: "metrics2col",
-          rows: [
-            { key: "Y1 complaints",   value: "↓ 72%", color: "green" },
-            { key: "Y2 complaints",   value: "↓ 55%", color: "green" },
-            { key: "Y1 satisfaction", value: "↑ 32%", color: "green" },
-            { key: "Y2 satisfaction", value: "↑ 35%", color: "green" },
+          type: "bullets",
+          items: [
+            "{purple:CDGT} relational graph transformer with relation-aware attention and 3 message-passing hops",
+            "Retrieval-augmented prediction cites k=8 nearest precedents for each recommendation",
+            "Counterfactual treatment-effect estimates and provenance-weighted conformal intervals",
+            "Path-dependent cost accumulator: deductible burn-down, tiered coinsurance, absorbing out-of-pocket cap",
+            "Fail-closed federal plan/rate ingestion where bad data widens uncertainty instead of corrupting ranking",
           ],
         },
       ],
-    },       {
-      id: "pj-chaos",
-      title: "Chaotic Systems Playground",
-      sub: "Lorenz attractor · coupled oscillators (in progress)",
+    },
+    {
+      id: "pj-arb",
+      title: "Biophysical Alpha Signals",
+      sub: "Sports betting market fatigue model",
       tags: [
-        { label: "SciPy",       type: "t" },
-        { label: "RK45",        type: "p" },
-        { label: "SDE",         type: "o" },
-        { label: "in progress", type: "y" },
+        { label: "MediaPipe", type: "t" },
+        { label: "Kalman", type: "p" },
+        { label: "LSTM", type: "p" },
+        { label: "Kelly", type: "g" },
       ],
       defaultOpen: false,
       body: [
         {
           type: "prose",
-          text: "Chaotic systems: deterministic but exponentially sensitive to initial conditions. Two trajectories 0.0001 apart diverge completely — this is why long-range weather forecasting is fundamentally impossible.",
+          text: "Extracted player-motion signals from broadcast video to test whether fatigue proxies identify pricing dislocations in player-prop markets.",
         },
         {
           type: "bullets",
           items: [
-            "Lorenz ODEs numerically integrated by solve_ivp (RK45) at rtol=1e-10 — tight tolerance prevents error amplification",
-            "Coupled pendulums: 4-ODE system, coupling strength slider triggers chaos transition live",
-            "Langevin SDE noise injection — numpy.random.normal(0,σ) added each step",
-            "Phase plots (position vs velocity) show bifurcation in real time as ρ is swept",
-            "matplotlib.animation.FuncAnimation at ~20fps, matplotlib.widgets.Slider for interactive params",
+            "{orange:MediaPipe Pose} extracts per-player joint velocities from broadcast footage",
+            "Rolling-variance fatigue proxy denoised with a Kalman/RTS smoother",
+            "PyTorch LSTM encoder-decoder trained on 3 NBA seasons",
+            "Simulated positions sized with quarter-Kelly when model and bookmaker-implied probabilities diverged by >5 percentage points",
           ],
         },
       ],
-    }, {
+    },
+    {
+      id: "pj-dorm",
+      title: "Dorm Assignment Optimizer",
+      sub: "800-student room assignment",
+      tags: [
+        { label: "ILP", type: "p" },
+        { label: "McCormick", type: "o" },
+        { label: "PuLP/CBC", type: "t" },
+        { label: "GA heuristic", type: "g" },
+      ],
+      defaultOpen: false,
+      body: [
+        {
+          type: "prose",
+          text: "Formulated room assignment as a binary linear program, with a parallel genetic algorithm as a fast heuristic for large runs.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "x[s,r] binary assignment variables with room-capacity and eligibility constraints",
+            "Co-room preferences linearized via McCormick envelopes",
+            "Exact solve with PuLP/CBC; heuristic path via parallel GA for quick administrative iteration",
+            "Interface supports manual exception handling without rebuilding the optimization model",
+          ],
+        },
+      ],
+    },
+    {
       id: "pj-pelicoin",
       title: "Financial Literacy Platform v2",
       sub: "Loomis Chaffee School · Pelicoin",
       tags: [
-        { label: "Supabase",       type: "t" },
-        { label: "Microsoft API",  type: "o" },
-        { label: "Firebase",       type: "o" },
+        { label: "Supabase", type: "t" },
+        { label: "Microsoft API", type: "o" },
+        { label: "Firebase", type: "o" },
         { label: "live on campus", type: "g" },
       ],
       defaultOpen: false,
       body: [
         {
           type: "prose",
-          text: "All-in-one management platform for the Financial Literacy Program at Loomis Chaffee. Replaced a fully manual process — Dr. Fisher previously adjusted tax rates, interest rates, stock/bond returns, and Pelicoin balances for every student individually.",
+          text: "All-in-one management platform for the Financial Literacy Program at Loomis Chaffee. Replaced a fully manual process for balances, tax rates, interest rates, and simulated returns.",
         },
         {
           type: "bullets",
           items: [
-            "Students can view balances, sign up for events, purchase items, and initiate internal transfers",
-            "Functions as a full banking app with real-time balance updates",
-            "Admin panel lets Dr. Fisher manage everything through an integrated Excel file via Microsoft API",
-            "Stack: React + Material UI frontend, Supabase + Firebase backend",
+            "Students view balances, sign up for events, purchase items, and initiate internal transfers",
+            "Admin panel integrates with Excel via Microsoft API for familiar faculty workflows",
+            "React + Material UI frontend with Supabase/Firebase backend services",
           ],
         },
       ],
@@ -133,65 +111,84 @@ export const projectsData = {
     {
       id: "pj-chem",
       title: "Chemistry Molecule Viewer",
-      sub: "Loomis Chaffee Chemistry Department",
+      sub: "Interactive 2D/3D molecule figures",
       tags: [
-        { label: "PubChem API",   type: "t" },
-        { label: "Linear Algebra",type: "p" },
-        { label: "AWS",           type: "o" },
-        { label: "live in use",   type: "g" },
+        { label: "PubChem API", type: "t" },
+        { label: "Linear Algebra", type: "p" },
+        { label: "AWS", type: "o" },
+        { label: "curriculum", type: "g" },
       ],
       defaultOpen: false,
       body: [
         {
           type: "prose",
-          text: "Interactive 2D/3D molecule viewer for the Loomis Chaffee chemistry curriculum. Replaced manual physical model building with a web app now integrated into classes.",
+          text: "Interactive molecule viewer for the Loomis Chaffee chemistry curriculum, replacing physical model demos with inspectable 2D/3D figures.",
         },
         {
           type: "bullets",
           items: [
-            "PubChem API for molecule data; linear algebra to calculate element positions in 3D space",
-            "2D and 3D viewing modes; students and teachers can interact with any molecule",
-            "Stack: Angular + React frontend, Python/Flask backend, Firebase + AWS infrastructure",
-            "Now integrated into the Loomis Chaffee chemistry curriculum",
+            "PubChem API for molecule data and metadata",
+            "Linear algebra for element placement and 3D transforms",
+            "Angular/React frontends with Python/Flask backend and Firebase/AWS infrastructure",
           ],
         },
       ],
     },
+    {
+      id: "pj-bb",
+      title: "Samsung Billboard Dashboard",
+      sub: "Real-time inventory stream",
+      tags: [
+        { label: "Kafka", type: "o" },
+        { label: "Redis", type: "r" },
+        { label: "Flask", type: "t" },
+        { label: "AWS", type: "o" },
+      ],
+      defaultOpen: false,
+      body: [
         {
+          type: "prose",
+          text: "Dashboard for live billboard slot availability and bid metrics, with end-to-end latency under {green:35 ms} from bid event to React re-render.",
+        },
+        {
+          type: "code",
+          text: "bid event → Kafka (12 partitions) → Flask consumer\n→ idempotent Redis write → dashboard re-render",
+        },
+      ],
+    },
+    {
       id: "pj-pokemon",
-      title: "Custom Pokémon Game Portfolio",
+      title: "Custom Pokemon Game Portfolio",
       sub: "Interactive 3D portfolio experience",
       tags: [
-        { label: "Three.js",       type: "t" },
-        { label: "WebGL",          type: "t" },
-        { label: "Blender",        type: "o" },
-        { label: "Framer Motion",  type: "p" },
+        { label: "Three.js", type: "t" },
+        { label: "WebGL", type: "t" },
+        { label: "Blender", type: "o" },
+        { label: "portfolio", type: "p" },
       ],
       defaultOpen: false,
       body: [
         {
           type: "prose",
-          text: "An online game where users control my dog (Pommy) in a Pokémon world to navigate my portfolio. Uses WebGL and Three.js for 3D rendering, with Blender assets.",
+          text: "A 3D portfolio world where visitors navigate a game scene and discover content through interaction instead of scrolling a static page.",
         },
         {
           type: "bullets",
           items: [
-            "w-a-s-d controls to navigate Pommy; press space near the arrow marker to access portfolio sections",
-            "Hold cursor and drag to change viewing angles; soccer ball physics for Pommy to kick around",
-            "Linear algebra for transform calculations; Framer Motion for UI transitions",
-            "Planned updates: faster rendering, clearer graphics, wild Pokémon encounters",
+            "Character movement, camera control, object interaction, and scene navigation",
+            "Three.js/WebGL rendering with Blender assets",
+            "Linear algebra for transform calculations and responsive interaction polish",
           ],
         },
       ],
     },
-
     {
       id: "pj-workjob",
       title: "Workjob Assigner",
-      sub: "Loomis Chaffee School — 500+ students",
+      sub: "500+ student campus-job assignment",
       tags: [
-        { label: "Python",     type: "t" },
-        { label: "React",      type: "t" },
+        { label: "Python", type: "t" },
+        { label: "React", type: "t" },
         { label: "TypeScript", type: "t" },
         { label: "Mantine UI", type: "o" },
       ],
@@ -199,88 +196,14 @@ export const projectsData = {
       body: [
         {
           type: "prose",
-          text: "Automatic assignment platform that places 500+ students into mandatory campus workjobs. Previously done manually by Ms. Conklin within a tight schedule-release window of a few days.",
+          text: "Automatic assignment platform that places students into mandatory campus jobs under schedule constraints, replacing a tight manual schedule-release workflow.",
         },
         {
           type: "bullets",
           items: [
-            "Algorithm cross-references each student's free periods against workjob meeting periods",
-            "Drag-and-drop UI for manual adjustments after the automated pass",
-            "Stack: Python assignment engine, React + TypeScript + Mantine UI frontend",
-          ],
-        },
-      ],
-    },
-
-    {
-      id: "pj-bb",
-      title: "Samsung Billboard Dashboard",
-      sub: "Real-time inventory dashboard",
-      tags: [
-        { label: "Kafka", type: "o" },
-        { label: "Redis", type: "r" },
-        { label: "SSE",   type: "t" },
-        { label: "AWS",   type: "o" },
-      ],
-      defaultOpen: false,
-      body: [
-        {
-          type: "prose",
-          text: "End-to-end latency {green:~33ms} from bid placement to all dashboards updated. See experience page for the full architecture and GIL bug story.",
-        },
-        {
-          type: "code",
-          text: "t=0ms   click \"Place Bid\"\nt=15ms  Flask validates → writes PostgreSQL\nt=20ms  publishes BID_PLACED → Kafka\nt=26ms  consumer reads → Redis hset\nt=30ms  SSE push → all open browsers\nt=33ms  React re-renders — live update",
-        },
-      ],
-    },
-    {
-      id: "pj-xc",
-      title: "XC Scorer",
-      sub: "Loomis Chaffee Cross Country",
-      tags: [
-        { label: "Python",    type: "t" },
-        { label: "TKinter",   type: "o" },
-        { label: "Bootstrap", type: "t" },
-      ],
-      defaultOpen: false,
-      body: [
-        {
-          type: "prose",
-          text: "Automatic scorer for cross country meets at Loomis Chaffee. Previously Mrs. Purdy manually recorded all individual times and compared across schools to determine place and score.",
-        },
-        {
-          type: "bullets",
-          items: [
-            "Upload meet results file → algorithm automatically scores and ranks all teams and individuals",
-            "Multiple export options for results distribution",
-            "TKinter UI for live adjustments; Bootstrap for web-facing output",
-          ],
-        },
-      ],
-    },
-    {
-      id: "pj-intl",
-      title: "International Student Meeting Scheduler",
-      sub: "Loomis Chaffee — Mrs. Pond",
-      tags: [
-        { label: "Python",   type: "t" },
-        { label: "Qt",       type: "o" },
-        { label: "PySide6",  type: "o" },
-      ],
-      defaultOpen: false,
-      body: [
-        {
-          type: "prose",
-          text: "Automatic weekly scheduler for International Student Ambassador meetings with their Dean. Mrs. Pond is only on campus Mondays, Wednesdays, and Fridays, making manual scheduling complex and time-consuming.",
-        },
-        {
-          type: "bullets",
-          items: [
-            "Ingests school schedule, student schedules, and faculty schedules simultaneously",
-            "Finds clumps of students with matching 45-minute free periods on Mrs. Pond's on-campus days",
-            "PySide6/Qt UI for manual pre-assignment adjustments",
-            "Privacy-sensitive — no public demo available",
+            "Cross-references student free periods against workjob meeting periods",
+            "Drag-and-drop interface for targeted manual adjustments after automated placement",
+            "Python assignment engine with React/TypeScript frontend",
           ],
         },
       ],

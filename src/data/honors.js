@@ -1,18 +1,19 @@
 export const honorsData = {
   cards: [
     {
-      id: "hon-cp",
-      title: "USACO Platinum Division",
+      id: "hon-usaco-intl",
+      title: "USACO — 80th Internationally",
       sub: "U.S.A. Computing Olympiad",
       tags: [
-        { label: "top ~200-500 US", type: "y" },
+        { label: "80th intl", type: "y" },
+        { label: "Platinum", type: "p" },
         { label: "algorithms",      type: "p" },
       ],
       defaultOpen: true,
       body: [
         {
           type: "prose",
-          text: "~200-500 US students reach Platinum. Problems require recognizing non-obvious reductions under time pressure.",
+          text: "Ranked {yellow:80th internationally} and reached the USACO Platinum division. Problems require recognizing non-obvious reductions under time pressure.",
         },
         {
           type: "bullets",
@@ -21,6 +22,22 @@ export const honorsData = {
             "Dinic's max flow · Tarjan's SCC · Gaussian elim on GF(2)",
             "Many Platinum competitors represent the US at IOI",
           ],
+        },
+      ],
+    },
+    {
+      id: "hon-citadel",
+      title: "Discover Citadel",
+      sub: "Citadel",
+      tags: [
+        { label: "selected", type: "g" },
+        { label: "markets", type: "p" },
+      ],
+      defaultOpen: false,
+      body: [
+        {
+          type: "prose",
+          text: "Selected for Discover Citadel, connecting quantitative problem solving with markets and engineering.",
         },
       ],
     },
@@ -56,24 +73,8 @@ export const honorsData = {
           items: [
             "{yellow:1st Place AMC 12} — top score nationally. AIME qualifier (unable to take due to scheduling).",
             "{yellow:Connecticut State Team} — American Regional Math League (ARML). Team relay + individual rounds.",
-            "{purple:Cambridge Centre STEM Scholar} — Quantum Computation. Grover's, Shor's, QEC basics.",
+            "{purple:CCIR STEM Scholar} — Quantum Computing. Grover's, Shor's, QEC basics.",
           ],
-        },
-      ],
-    },
-    {
-      id: "hon-fellow",
-      title: "Non-Trivial Fellowship — 3rd Place",
-      sub: "$1,500 award",
-      tags: [
-        { label: "$1500",      type: "g" },
-        { label: "fellowship", type: "p" },
-      ],
-      defaultOpen: false,
-      body: [
-        {
-          type: "prose",
-          text: "Fellowship for intellectually ambitious projects. Competitive selection across applicants proposing novel research or entrepreneurial work.",
         },
       ],
     },
@@ -106,22 +107,6 @@ export const honorsData = {
         {
           type: "prose",
           text: "Finalist and medalist at the Connecticut Science and Engineering Fair.",
-        },
-      ],
-    },
-    {
-      id: "hon-hosa",
-      title: "HOSA Math — 3rd Place in CT",
-      sub: "Internationals Qualifier",
-      tags: [
-        { label: "3rd in CT",      type: "y" },
-        { label: "internationals", type: "p" },
-      ],
-      defaultOpen: false,
-      body: [
-        {
-          type: "prose",
-          text: "3rd Place in Connecticut in HOSA Math, qualifying for the international competition.",
         },
       ],
     },

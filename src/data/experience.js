@@ -1,29 +1,79 @@
 export const experienceData = {
   cards: [
     {
-      id: "ex-ucsc",
-      title: "AI Research Intern",
-      sub: "University of California, Santa Cruz",
+      id: "ex-insurf",
+      title: "Founder & CTO",
+      sub: "Insurf · Y Combinator S26",
       tags: [
-        { label: "current",     type: "g" },
-        { label: "ML research", type: "p" },
-        { label: "PyTorch",     type: "t" },
-        { label: "Docker",      type: "" },
+        { label: "current", type: "g" },
+        { label: "graph transformer", type: "p" },
+        { label: "health insurance", type: "t" },
+        { label: "solo engineer", type: "o" },
       ],
       defaultOpen: true,
       body: [
         {
           type: "prose",
-          text: "{orange:WaveFunction Collapse} — studied whether a Transformer can learn to generate structured tile-based content as well as the classical WFC algorithm. Compared on three axes: {green:diversity}, {green:KL-div}, and {green:constraint satisfaction rate}.",
+          text: "Sole engineer building decision intelligence for health insurance. Core system: {purple:CDGT}, a relational graph transformer over Insurf's decision graph with provenance-aware uncertainty.",
         },
         {
           type: "bullets",
           items: [
-            "Implemented WFC from scratch: AC-3 propagation, Shannon entropy cell selection, frequency-weighted tile collapse",
-            "Trained 4-layer Transformer (d=128, 4 heads) — autoregressive LM on linearized tile grids",
-            "AdamW + linear warmup + cosine decay. Mixed precision (FP16 + GradScaler). Gradient clipping.",
-            "Docker pinned to CUDA 11.8 + cuDNN 8. GitLab CI benchmarks on gpu-runner on every push.",
-            "Bayesian hyperparameter sweep via wandb.sweep() with Expected Improvement acquisition.",
+            "Relation-aware attention with 3 message-passing hops; retrieval-augmented predictions cite the k=8 nearest precedents",
+            "Counterfactual treatment-effect estimation and provenance-weighted conformal intervals that widen as cell support thins",
+            "Seeded stochastic sandbox of 2,000 synthetic decisions verifies embeddings, retrievals, predictions, and all 428 prediction cells byte-for-byte",
+            "Cost engine simulates deductible burn-down, tiered coinsurance, absorbing out-of-pocket caps, and IRS/CMS subsidy math matching HealthCare.gov to the dollar",
+            "Fail-closed ingestion for federal plan/rate feeds: incomplete issuer filings widen uncertainty instead of silently zeroing costs",
+          ],
+        },
+      ],
+    },
+    {
+      id: "ex-brown",
+      title: "Undergraduate Research Assistant",
+      sub: "Brown University",
+      tags: [
+        { label: "LLM extraction", type: "p" },
+        { label: "econometrics", type: "g" },
+        { label: "market design", type: "t" },
+      ],
+      defaultOpen: false,
+      body: [
+        {
+          type: "prose",
+          text: "Researching how belief shocks propagate across markets and how bounded arbitrage appears in controlled trading experiments.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Built LLM pipelines that extract structured belief signals from analyst reports and other unstructured text",
+            "Ran downstream econometrics tracing belief-shock diffusion across equity and bond markets",
+            "Designed double-auction experiments on limits of arbitrage and belief formation; calibrated parameters so equilibrium deviations are identifiable in session-level data",
+          ],
+        },
+      ],
+    },
+    {
+      id: "ex-dawn",
+      title: "Founding Engineer",
+      sub: "Dawn Industries · Y Combinator S26",
+      tags: [
+        { label: "LLM inference", type: "p" },
+        { label: "RunPod", type: "t" },
+        { label: "computer vision", type: "g" },
+      ],
+      defaultOpen: false,
+      body: [
+        {
+          type: "prose",
+          text: "Benchmarked inference economics and built a procedure-video scoring pipeline from 3D hand/tool trajectories.",
+        },
+        {
+          type: "bullets",
+          items: [
+            "Benchmarked LLM throughput, latency, and $/token across GPU architectures under quantization and dynamic batching",
+            "Tracked 3D hand-joint and tool-tip trajectories from procedure video",
+            "Aligned each run to a golden reference with dynamic time warping and scored deviation by 3D-coordinate gap",
           ],
         },
       ],
@@ -47,11 +97,10 @@ export const experienceData = {
         {
           type: "bullets",
           items: [
-            "Cross-correlation (scipy.signal.correlate) on shared anchor events to find clock offsets",
-            "Anti-aliased resampling with resample_poly — Kaiser FIR pre-filter to prevent aliasing",
-            "Gap fill policy: linear <500ms · cubic spline 500ms–2s · boolean flag >2s (never silently fabricate)",
-            "Feature store: SHA-256 spec-hash for auto cache invalidation. Trailing windows only — no data leakage.",
-            "LTTB downsampling (360K→2K points) for Flask/React visualization without losing peaks/valleys",
+            "Designed a versioned, point-in-time feature store in Python/PostgreSQL with SHA-256 spec hashing and trailing windows",
+            "Stored reproducible backtest data as Parquet at 5-10x compression versus CSV, eliminating lookahead",
+            "Cross-correlation clock-offset estimation, anti-aliased resampling, and imputation-flagged gap filling",
+            "Rendered 360K-point streams via LTTB downsampling for fast inspection without losing peaks/valleys",
           ],
         },
       ],
@@ -59,7 +108,7 @@ export const experienceData = {
     {
       id: "ex-samsung",
       title: "Software Engineer Intern",
-      sub: "Samsung Cheil",
+      sub: "Samsung",
       tags: [
         { label: "Kafka",  type: "o" },
         { label: "AWS ECS",type: "o" },
@@ -70,7 +119,7 @@ export const experienceData = {
       body: [
         {
           type: "prose",
-          text: "Real-time billboard inventory dashboard. Hundreds of billboards → multiple concurrent advertisers watching live bid prices. End-to-end latency: {green:~33ms} from bid click to all open dashboards updated.",
+          text: "Real-time billboard inventory dashboard. Advertisers watched live slot availability and bid metrics with end-to-end latency under {green:35 ms} from bid event to dashboard re-render.",
         },
         {
           type: "code",
@@ -80,9 +129,8 @@ export const experienceData = {
           type: "bullets",
           items: [
             "Kafka: hash(billboard_id) % 12 for partition assignment — events per billboard always ordered",
-            "at-least-once delivery (commit after Redis write) — state updates idempotent so duplicates are harmless",
-            "{orange:GIL bug found & fixed} — consumer held GIL during burst → ALB health check timeout → ECS replacement (30s delay). Fix: consumer isolated to separate OS process.",
-            "Rolling zero-downtime deploy: GitHub Actions → ECR → new ECS Task Definition → drain old containers",
+            "Manual offset commits and idempotent Redis writes: at-least-once delivery across 12 partitions with zero data loss on container restarts",
+            "Deployed on AWS ECS Fargate via GitHub Actions CI/CD",
           ],
         },
       ],

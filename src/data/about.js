@@ -13,38 +13,40 @@ export const aboutData = {
       body: [
         {
           type: "prose",
-          text: "I'm drawn to challenges and problem-solving. I am particularly interested in solving problems using modern computer science techniques, and applying such skills to mathematics, physics, trading, or general optimizations in real-life.",
+          text: "I build technical systems where models, data quality, and product constraints have to agree. Right now that means {green:Insurf}: decision intelligence for health insurance, built with graph transformers, statutory cost simulation, and uncertainty-aware ranking.",
         },
         {
           type: "prose",
           muted: true,
-          text: "",
+          text: "At Brown, I study Applied Mathematics-CS and Physics and research belief formation, limits of arbitrage, and market diffusion.",
         },
       ],
     },
     {
       id: "about-arc",
-      title: "Internship Arc",
-      sub: "Systems → Data Science → ML Research",
+      title: "Builder Arc",
+      sub: "Insurance AI → market research → inference systems → data infrastructure",
       tags: [
-        { label: "Samsung Cheil", type: "o" },
-        { label: "CMU/RIT", type: "t" },
-        { label: "UCSC AI", type: "g" },
+        { label: "Insurf", type: "g" },
+        { label: "Brown", type: "p" },
+        { label: "Dawn", type: "t" },
+        { label: "Samsung", type: "o" },
       ],
       defaultOpen: false,
       body: [
         {
           type: "bullets",
           items: [
-            { highlight: "Samsung Cheil", highlightColor: "orange", text: "— systems engineering (Kafka, AWS ECS, real-time dashboards)" },
-            { highlight: "CMU/RIT", highlightColor: "teal", text: "— data science (multi-sensor pipelines, SQL feature stores, signal processing)" },
-            { highlight: "UCSC AI Lab", highlightColor: "green", text: "— ML research (WaveFunction Collapse, Transformer training, eval benchmarks)" },
+            { highlight: "Insurf", highlightColor: "green", text: "— graph-transformer decision engine, conformal uncertainty, federal plan/rate ingestion" },
+            { highlight: "Brown Research", highlightColor: "purple", text: "— LLM belief extraction and econometrics over equity/bond market diffusion" },
+            { highlight: "Dawn Industries", highlightColor: "teal", text: "— LLM inference benchmarks and 3D procedure-trajectory scoring" },
+            { highlight: "Samsung", highlightColor: "orange", text: "— Kafka/Redis/AWS real-time dashboard infrastructure under 35 ms latency" },
           ],
         },
         {
           type: "prose",
           muted: true,
-          text: "Each role deepened a different layer of the stack — starting at infrastructure, moving through data, arriving at research.",
+          text: "The through-line is reliability under messy reality: incomplete public data, noisy video, drifting sensors, and markets where the measurement layer matters.",
         },
       ],
     },
