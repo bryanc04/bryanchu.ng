@@ -691,8 +691,7 @@ function HomePage() {
         </a>
       </div>
       <div style={{ color: "var(--muted)", fontSize: 11, marginTop: 10 }}>
-        navigate with buttons above · type a command below · click call stack
-        frames to jump back{" "}
+        explore the pages below · honors contains the full awards list
       </div>
     </>
   );
