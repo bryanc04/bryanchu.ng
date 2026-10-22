@@ -28,3 +28,17 @@ responsive styles. `npm run lint` checks the full repository.
 Existing production is https://www.bryanchu.ng, deployed by Netlify from `terminal`.
 The earlier authorized merge verified that existing integration automatically
 deploys this branch. No hosting or permission settings were changed.
+
+## Minimal terminal refinement
+
+The subsequent user request explicitly restores cursor animation while retaining
+the terminal identity. Three fixed decorative pixel nodes now animate alongside
+the native pointer. A single coalesced requestAnimationFrame loop changes only
+transform and opacity, and stops after 220 ms of inactivity. Touch/coarse pointer,
+reduced motion, hidden tabs, blur, exit and unmount disable or clear the effect.
+No WebGL, canvas, per-pointer React state updates, or hidden native pointer.
+
+The same terminal layout now uses left-aligned content, quiet neutral tags and
+borders, a compact ASCII header, and no scanline/vignette/glow/full-screen wipe.
+No sections, credentials, awards or navigation commands were removed.
+Eight tests cover terminal/content regressions and cursor scheduling/cleanup.

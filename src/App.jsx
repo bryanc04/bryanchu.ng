@@ -1,3 +1,4 @@
+import CursorTrail from "./components/CursorTrail/CursorTrail";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { homeData } from "./data/home";
 import { aboutData } from "./data/about";
@@ -34,10 +35,6 @@ const CSS = `
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:100%;height:100%;background:var(--bg);color:var(--txt-main);
   font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.6;overflow:hidden;}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:900;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.02) 2px,rgba(0,0,0,.02) 4px);}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:899;
-  background:radial-gradient(ellipse 110% 100% at 50% 50%,transparent 60%,rgba(0,0,0,.05) 100%);}
 #root{width:100vw;height:100vh;}
 ::-webkit-scrollbar{width:3px;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
@@ -263,6 +260,32 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .wipe{position:fixed;inset:0;z-index:800;pointer-events:none;background:var(--p);opacity:0;clip-path:inset(0 100% 0 0);}
 .wipe.go{animation:wipe-anim 0.35s ease-in-out forwards;}
 
+/* Quiet terminal chrome: same debugger, less visual noise. */
+#root{text-align:left;}
+.led,.bar-fill{box-shadow:none;}
+.ibar.focused{animation:none;border-color:var(--p2);}
+.wipe{display:none;}
+.card{border-width:0 0 1px;margin-bottom:8px;animation:none;}
+.card:hover{border-color:var(--border);}
+.card-head{padding:12px 4px;}
+.card-body-inner{padding:14px 20px;}
+.card.open .card-body{border-top-width:0;}
+.card-tags{gap:8px;}
+.tag,.tag.g,.tag.o,.tag.y,.tag.p,.tag.r,.tag.t{border:0;padding:0;color:var(--muted);}
+.tag::before{content:'#';opacity:.5;}
+.bbox{border-width:0 0 1px;padding:14px 0;}
+.disp{padding:20px 24px;}
+.s-hdr,.p-hdr{background:transparent;letter-spacing:.09em;}
+.rv,.wv,.hb.lit{color:var(--muted);}
+.qb{border-color:transparent;}
+.qb.on{border-color:var(--border);color:var(--p2);}
+.ascii-name{color:var(--p2);}
+.cursor-trail{position:fixed;inset:0;pointer-events:none;z-index:9999;contain:strict;}
+.cursor-trail i{position:absolute;top:0;left:0;width:4px;height:6px;background:var(--p2);opacity:0;will-change:transform,opacity;}
+.cursor-trail i:nth-child(2){width:3px;height:4px;}
+.cursor-trail i:nth-child(3){width:2px;height:2px;}
+@media(prefers-reduced-motion:reduce),(pointer:coarse),(hover:none){.cursor-trail{display:none;}}
+
 @media(max-width:900px){
   .side,.panel,.ibar,.stat{display:none !important;}
   .shell{
@@ -474,7 +497,7 @@ function HomePage() {
         gap: "40px",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "300px",
+        minHeight: "220px",
       }}
     >
         <pre
@@ -1194,6 +1217,7 @@ export default function App() {
   return (
     <>
       <style>{CSS}</style>
+      <CursorTrail />
       <div className={`wipe${wipe ? " go" : ""}`} />
       <div className="shell">
         {/* TOP BAR */}

@@ -24,8 +24,9 @@ test('all original navigation and terminal commands preserved',()=>{
 test('no company mentions in app, metadata, content or built output',()=>{
  for(const path of ['index.html','src/App.jsx',...readdirSync('src/data').map(x=>'src/data/'+x),...readdirSync('dist/assets').filter(x=>x.endsWith('.js')).map(x=>'dist/assets/'+x)]) assert.doesNotMatch(readFileSync(path,'utf8'),/insurf/i,path);
 });
-test('native pointer without WebGL or pointer-following renderer',()=>{
+test('native pointer with isolated lightweight decorative trail',()=>{
  assert.doesNotMatch(app,/PixelTrail|CustomCursor|pointermove|mousemove|<Canvas/);
+ assert.match(app,/<CursorTrail \/>/);
  assert.doesNotMatch(readFileSync('index.html','utf8'),/cursor\s*:\s*none/);
  assert.match(readFileSync('index.html','utf8'),/cursor:\s*auto/);
 });
