@@ -1,33 +1,30 @@
-# Portfolio content provenance
+# Scoped terminal portfolio correction
 
-This refresh restores an awards-first personal portfolio. It does not add new
-credentials. Historical source versions remain available in git.
+The user explicitly requested keeping the existing interface. The original
+terminal UI from `0049f21ed3eae1749120eca063ffc0ea1f5d2f3c` is restored: layout,
+ASCII portrait/name, tabs, command shell, themes, boot sequence and side panels.
+The editorial redesign is superseded.
 
-- `terminal` commit `0049f21`: USACO 80th internationally / Platinum, PhysicsBowl
-  18th internationally / 2nd U.S. Northeast, Discover Citadel, CT State Team/ARML,
-  CCIR, TEAMS, CSEF, departmental honors, publications, degree and contact links.
-- `terminal` commit `7344577`: Non-Trivial Fellowship award and the same PhysicsBowl
-  placement. The refresh uses the conservative “Award recipient” wording from
-  `master` commit `a81d4f5`, rather than emphasizing a monetary amount.
-- `master` commit `a81d4f5`, `src/components/awards/awards.tsx`: AMC 12 highest
-  scorer at Loomis Chaffee. The old terminal copy said “top score nationally,”
-  which conflicts with this more specific source; the refresh uses school-level
-  wording and does not repeat the national claim.
-- Older `master` commit `8249020` says PhysicsBowl 20th, while both terminal
-  versions and newer master say 18th. This refresh preserves the current terminal
-  figure, not the older conflicting one.
-- Paper titles and DOI links: `master` research component at `a81d4f5` and terminal
-  research data at `0049f21`. Descriptions are shortened without new claims.
+Changes relative to that original UI:
+- Remove the company-focused references from metadata, boot, help and home.
+- Restore pre-company about/home/experience/projects/contact data from `7344577`.
+- Restore awards-focused homepage highlights; preserve USACO 80th internationally
+  and PhysicsBowl 18th internationally from the original current `0049f21` data.
+- Use school-level AMC 12 wording (supported by master `a81d4f5` awards data), not
+  the old terminal's contradictory national-score claim.
+- Keep the native pointer. Unmount the WebGL trail and custom JS cursor rather
+  than making pointer movement depend on rendering work.
+- Add reduced-motion and visible keyboard-focus styles without restyling the UI.
 
-The personal Apple Music recognition is intentionally separated from academic
-awards. Founder/company-focused content, the resume-style experience sections,
-and the simulated terminal have been removed from the published UI as requested.
+Degrees, contact information, publications and music recognition are all carried
+from existing source versions; no new credentials are added.
 
-# Deployment
+# Verification / deployment
 
-Existing production is https://www.bryanchu.ng and returns Netlify Edge headers.
-Its HTML matches this repository's `terminal` branch, not default `master`.
-No checked-in Netlify configuration or GitHub Actions workflow exists. The latest
-terminal commit has no GitHub status checks; automatic branch-to-site deployment
-has not been independently verified. Do not change hosting or merge to production
-without approval and confirmation of the existing Netlify branch configuration.
+`npm test` builds production and SSR bundles and runs 6 regression checks for the
+terminal structure, commands, company removal, pointer behavior, awards and
+responsive styles. `npm run lint` checks the full repository.
+
+Existing production is https://www.bryanchu.ng, deployed by Netlify from `terminal`.
+The earlier authorized merge verified that existing integration automatically
+deploys this branch. No hosting or permission settings were changed.
