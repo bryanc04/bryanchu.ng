@@ -21,16 +21,16 @@ const CSS = `
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
 
 :root {
-  --bg:#ffffff; --bg1:#ffffff; --bg2:#f9f9f9; --bg3:#f0f0f0;
-  --p:#00d4ff; --p2:#0099cc; --p3:#004d77; --p4:#001a33;
-  --txt:#111111; --muted:#777777; --dim:#cccccc;
-  --accent:#00d4ff;
-  --green:#00b86a; --grn2:#008c50;
-  --yel:#ffb000; --ora:#ff7b3a; --red:#ee3355;
-  --pur:#9333ea; --pink:#db2777; --teal:#0d9488;
+  --bg:#111518; --bg1:#111518; --bg2:#171d21; --bg3:#1e272c;
+  --p:#75dfd0; --p2:#75dfd0; --p3:#004d77; --p4:#001a33;
+  --txt:#e5eceb; --muted:#9ba9ad; --dim:#7d8a90;
+  --accent:#75dfd0;
+  --green:#91d7ac; --grn2:#91d7ac;
+  --yel:#e8c580; --ora:#d8ae8d; --red:#f397a0;
+  --pur:#c5b8e8; --pink:#deaad4; --teal:#8bcac4;
   --trans:160ms;
-  --border:#e5e5e5;
-  --txt-main:#111111;
+  --border:#29343a;
+  --txt-main:#e5eceb;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:100%;height:100%;background:var(--bg);color:var(--txt-main);
@@ -286,6 +286,49 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(-
 .cursor-trail i:nth-child(3){width:2px;height:2px;}
 @media(prefers-reduced-motion:reduce),(pointer:coarse),(hover:none){.cursor-trail{display:none;}}
 
+/* Minimal workspace; the full debugger is one explicit toggle away. */
+.shell.quiet{grid-template-columns:176px minmax(0,1fr);grid-template-areas:"topbar topbar" "side main" "stat stat";}
+.shell.quiet .diagnostics,.shell.quiet .panel,.shell.quiet .tb-clock,.shell.quiet .tb-pill:not(.lit),.shell.quiet .sb-right,.shell.quiet .stat>.sb:nth-child(n+5){display:none;}
+.shell.quiet .ascii-face{display:none;}
+.shell.quiet .addr-pc,.shell.quiet .addr-pc+span,.shell.quiet .addr-mode{display:none;}
+.diagnostic-note{padding:8px 10px;color:var(--muted);font-size:9px;}
+.shell.quiet .srcmap{padding:12px 10px;font-size:11px;line-height:2.6;}
+.shell.quiet .s-hdr{padding:12px 14px;font-size:10px;}
+.shell.quiet .srcmap .dir{color:var(--muted);padding-left:8px;margin-bottom:8px;}
+.shell.quiet .srcmap .sf{padding-left:6px;}
+.shell.quiet .addrbar{padding:12px 24px;}
+.shell.quiet .disp{padding:28px clamp(24px,5vw,80px);}
+.shell.quiet .disp>div{max-width:880px;margin-inline:auto;}
+.shell.quiet .hp-ascii-wrap{justify-content:flex-start!important;}
+.shell.quiet .ascii-name{font-size:9px;}
+.shell.quiet .ibar{margin:12px 24px;border-radius:0;}
+.shell.quiet .qnav{padding:8px 24px;gap:6px;}
+.shell.quiet .qb{padding:6px 10px;}
+.shell.quiet .tb-brand{margin-left:20px;margin-right:auto;letter-spacing:.1em;}
+a{color:var(--p2)!important;text-underline-offset:3px;}
+[role=button]:focus-visible{outline:2px solid var(--p2);outline-offset:3px;}
+.card-title{font-size:13px;font-weight:500;}
+.card-head{padding:16px 4px;}
+.card-sub,.card-tags{font-size:10px;}
+.prose,.bul{font-size:12px;line-height:1.8;}
+.kk{width:115px;}
+.inp::placeholder{color:var(--muted);}
+#root,.shell{height:100dvh;min-height:0;}
+@media(max-width:900px){
+  .shell.quiet{grid-template-columns:minmax(0,1fr);grid-template-areas:"topbar" "main";}
+  .shell.quiet .disp{padding:20px 18px;}
+  .shell.quiet .qnav{padding:8px;gap:4px;}
+  .shell.quiet .qb{padding:8px 10px;min-height:44px;}
+  .shell.quiet .tb-brand{margin-left:10px;font-size:9px;}
+  .shell .inspect-btn{display:none;}
+  .shell .theme-btn:not(.inspect-btn){display:block!important;min-width:70px;}
+  .shell.quiet .ascii-name{font-size:6px!important;}
+  .hp-ascii-wrap{align-items:flex-start!important;}
+  .kk{width:90px;}
+  .kv-row{font-size:11px;}
+  .qnav{flex-shrink:0;padding-bottom:max(8px,env(safe-area-inset-bottom))!important;}
+}
+
 @media(max-width:900px){
   .side,.panel,.ibar,.stat{display:none !important;}
   .shell{
@@ -454,7 +497,9 @@ function ExpandCard({ card }) {
   const [open, setOpen] = useState(card.defaultOpen || false);
   return (
     <div className={`card${open ? " open" : ""}`}>
-      <div className="card-head" onClick={() => setOpen((o) => !o)}>
+      <div className="card-head" role="button" tabIndex={0} aria-expanded={open} aria-label={card.title}
+        onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); setOpen(value => !value); } }}
+        onClick={() => setOpen((o) => !o)}>
         <span className="card-arrow">▶</span>
         <div className="card-htxt">
           <div className="card-title">{card.title}</div>
@@ -466,7 +511,7 @@ function ExpandCard({ card }) {
           </div>
         </div>
       </div>
-      <div className="card-body">
+      <div className="card-body" aria-hidden={!open}>
         <div className="card-body-inner">
           {/* skills: bars type */}
           {card.type === "bars" &&
@@ -497,7 +542,7 @@ function HomePage() {
         gap: "40px",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "220px",
+        minHeight: "160px",
       }}
     >
         <pre
@@ -771,6 +816,7 @@ function ContactPage({ pid, startTime, fakeCpu }) {
       >
         <span style={{ color: "var(--p2)" }}>bryan@portfolio $</span>
         <input
+          aria-label="Terminal command"
           autoFocus
           value={inputVal}
           onChange={(e) => setInputVal(e.target.value)}
@@ -852,6 +898,7 @@ export default function App() {
   const [signals, setSignals] = useState([]);
   const [hitCounts, setHitCounts] = useState({});
   const [themeIdx, setThemeIdx] = useState(0);
+  const [inspect, setInspect] = useState(false);
   const currentTheme = themes[themeIdx];
   const [wipe, setWipe] = useState(false);
   const [ibarFocused, setIbarFocused] = useState(false);
@@ -888,30 +935,30 @@ export default function App() {
   useEffect(() => {
     const root = document.documentElement;
     if (themeIdx === 0) {
-      // reset to default - black/white with color accents
+      // Default quiet charcoal console palette
       Object.entries({
-        "--bg": "#ffffff",
-        "--bg1": "#ffffff",
-        "--bg2": "#f9f9f9",
-        "--bg3": "#f0f0f0",
-        "--p": "#00d4ff",
-        "--p2": "#0099cc",
+        "--bg": "#111518",
+        "--bg1": "#111518",
+        "--bg2": "#171d21",
+        "--bg3": "#1e272c",
+        "--p": "#75dfd0",
+        "--p2": "#75dfd0",
         "--p3": "#004d77",
         "--p4": "#001a33",
-        "--txt": "#111111",
-        "--txt-main": "#111111",
-        "--muted": "#777777",
-        "--dim": "#cccccc",
-        "--border": "#e5e5e5",
-        "--accent": "#00d4ff",
-        "--green": "#00b86a",
-        "--grn2": "#008c50",
-        "--yel": "#ffb000",
-        "--ora": "#ff7b3a",
-        "--red": "#ee3355",
-        "--pur": "#9333ea",
-        "--pink": "#db2777",
-        "--teal": "#0d9488",
+        "--txt": "#e5eceb",
+        "--txt-main": "#e5eceb",
+        "--muted": "#9ba9ad",
+        "--dim": "#7d8a90",
+        "--border": "#29343a",
+        "--accent": "#75dfd0",
+        "--green": "#91d7ac",
+        "--grn2": "#91d7ac",
+        "--yel": "#e8c580",
+        "--ora": "#d8ae8d",
+        "--red": "#f397a0",
+        "--pur": "#c5b8e8",
+        "--pink": "#deaad4",
+        "--teal": "#8bcac4",
       }).forEach(([k, v]) => root.style.setProperty(k, v));
     } else {
       const vars = currentTheme.vars;
@@ -936,8 +983,9 @@ export default function App() {
     }
   }, [view, bootDone]);
 
-  // Clock tick
+  // Decorative diagnostics run only when the inspector is open.
   useEffect(() => {
+    if (!inspect) return;
     const tick = () => {
       const n = new Date(),
         p = (x) => String(x).padStart(2, "0");
@@ -950,10 +998,11 @@ export default function App() {
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [inspect]);
 
   // Metrics
   useEffect(() => {
+    if (!inspect) return;
     const id = setInterval(() => {
       setFakeCpu((c) =>
         Math.max(0.4, Math.min(14, c + (Math.random() - 0.47) * 1.3)),
@@ -964,28 +1013,28 @@ export default function App() {
       setIrqCount((i) => i + Math.floor(Math.random() * 4));
     }, 900);
     return () => clearInterval(id);
-  }, []);
+  }, [inspect]);
 
   // Boot sequence
   useEffect(() => {
     const BOOT = [
-      `<span style="color:#333">GNU gdb (Ubuntu 14.2) 14.2</span>`,
-      `<span style="color:#333">Copyright (C) 2023 Free Software Foundation, Inc.</span>`,
-      `<span style="color:#555">Reading symbols from portfolio.elf...</span>`,
+      `<span style="color:var(--txt-main)">GNU gdb (Ubuntu 14.2) 14.2</span>`,
+      `<span style="color:var(--txt-main)">Copyright (C) 2023 Free Software Foundation, Inc.</span>`,
+      `<span style="color:var(--muted)">Reading symbols from portfolio.elf...</span>`,
       "",
-      `<span style="color:#333">[0.000] Loading ELF sections...</span>`,
-      `<span style="color:#333">[0.041] .text   0x00401000  r-x  executable</span>`,
-      `<span style="color:#333">[0.082] .data   0x00601000  rw-  read-write</span>`,
-      `<span style="color:#333">[0.121] .rodata 0x004ff000  r--  read-only</span>`,
+      `<span style="color:var(--txt-main)">[0.000] Loading ELF sections...</span>`,
+      `<span style="color:var(--txt-main)">[0.041] .text   0x00401000  r-x  executable</span>`,
+      `<span style="color:var(--txt-main)">[0.082] .data   0x00601000  rw-  read-write</span>`,
+      `<span style="color:var(--txt-main)">[0.121] .rodata 0x004ff000  r--  read-only</span>`,
       `<span style="color:var(--p)">[0.160] OK  Brown University · GPA 4.0 · Applied Math-CS + Physics</span>`,
       `<span style="color:var(--p)">[0.200] OK  USACO Platinum · AIME qualifier</span>`,
       `<span style="color:var(--p)">[0.240] OK  IEEE ICAIC 2024 · 2 publications</span>`,
       `<span style="color:var(--p)">[0.280] OK  USACO 80th intl · PhysicsBowl 18th intl</span>`,
-      `<span style="color:#555">[0.340] --  Kafka · Redis · PostgreSQL · Docker · AWS ready</span>`,
+      `<span style="color:var(--muted)">[0.340] --  Kafka · Redis · PostgreSQL · Docker · AWS ready</span>`,
       `<span style="color:var(--p)">[0.400] OK  Breakpoint 1 at home+0x0</span>`,
       "",
-      `<span style="color:#d0d0d0;font-weight:700">Breakpoint 1, home () at portfolio.c:1</span>`,
-      `<span style="color:#555">(gdb) run</span>`,
+      `<span style="color:var(--txt-main);font-weight:700">Breakpoint 1, home () at portfolio.c:1</span>`,
+      `<span style="color:var(--muted)">(gdb) run</span>`,
       "",
     ];
     let i = 0;
@@ -1219,7 +1268,7 @@ export default function App() {
       <style>{CSS}</style>
       <CursorTrail />
       <div className={`wipe${wipe ? " go" : ""}`} />
-      <div className="shell">
+      <div className={`shell${inspect ? " debug" : " quiet"}`}>
         {/* TOP BAR */}
         <div className="topbar">
           <div className="tb-pill lit">
@@ -1240,8 +1289,12 @@ export default function App() {
           </div>
           <span className="tb-brand">// BRYAN CHUNG //</span>
           <span className="tb-clock">{clock}</span>
+          <button className="theme-btn inspect-btn" aria-pressed={inspect} aria-label="Toggle simulated debugger panels" onClick={() => setInspect(value => !value)}>
+            [{inspect ? "inspect: on" : "inspect"}]
+          </button>
           <button
             className="theme-btn"
+            aria-label={`Cycle color theme; current: ${currentTheme.label}`}
             onClick={() => {
               const ni = (themeIdx + 1) % themes.length;
               setThemeIdx(ni);
@@ -1254,6 +1307,8 @@ export default function App() {
 
         {/* LEFT SIDEBAR */}
         <div className="side">
+          <div className="diagnostics">
+          <div className="diagnostic-note">simulated debugger</div>
           <div className="s-hdr">
             CALL STACK <span className="s-badge">{callStack.length}</span>
           </div>
@@ -1302,6 +1357,7 @@ export default function App() {
               ))}
           </div>
 
+          </div>
           <div className="s-hdr" style={{ marginTop: 4 }}>
             SOURCE MAP
           </div>
@@ -1311,6 +1367,8 @@ export default function App() {
               <span
                 key={n.id}
                 className={`sf${view === n.id ? " active" : ""}`}
+                role="button" tabIndex={0} aria-label={`Open ${n.id}`} aria-current={view === n.id ? "page" : undefined}
+                onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); navigate(n.cmd); } }}
                 onClick={() => navigate(n.cmd)}
               >
                 &nbsp;&nbsp;{n.id === "contact" ? "contact" : n.id}.c
@@ -1393,6 +1451,7 @@ export default function App() {
                   }}
                 >
                   <input
+          aria-label="Terminal command"
                     ref={inpRef}
                     className="inp"
                     type="text"

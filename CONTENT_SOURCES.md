@@ -42,3 +42,17 @@ The same terminal layout now uses left-aligned content, quiet neutral tags and
 borders, a compact ASCII header, and no scanline/vignette/glow/full-screen wipe.
 No sections, credentials, awards or navigation commands were removed.
 Eight tests cover terminal/content regressions and cursor scheduling/cleanup.
+
+## Focused technical workspace
+
+Following explicit permission for a bolder personal-site design, the default is a
+quiet charcoal source explorer and workspace. The original registers, memory,
+call stack, portrait and simulated telemetry remain available through an explicit
+accessible `[inspect]` toggle. Simulated values are labeled and their periodic
+updates stop when the inspector is closed. All existing content, commands,
+source navigation and selectable themes remain. The monochrome theme now has
+visible foreground colors on its existing black background.
+
+Mobile keeps all navigation buttons, uses 44px touch targets, dynamic viewport
+height and a visible theme control. Card/source controls support keyboard
+activation, cards expose expanded state, and command fields have accessible names.
